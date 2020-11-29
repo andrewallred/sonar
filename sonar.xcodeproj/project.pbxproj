@@ -18,6 +18,7 @@
 		85459500257378EB00E96F97 /* SearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594FF257378EB00E96F97 /* SearchResultController.m */; };
 		8545950325737DFD00E96F97 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8545950225737DFD00E96F97 /* AVFoundation.framework */; };
 		8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950525739B9F00E96F97 /* ServiceCaller.m */; };
+		8545950925739D3200E96F97 /* RegexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950825739D3200E96F97 /* RegexHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		8545950225737DFD00E96F97 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8545950425739B9F00E96F97 /* ServiceCaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceCaller.h; sourceTree = "<group>"; };
 		8545950525739B9F00E96F97 /* ServiceCaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceCaller.m; sourceTree = "<group>"; };
+		8545950725739D3200E96F97 /* RegexHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegexHelper.h; sourceTree = "<group>"; };
+		8545950825739D3200E96F97 /* RegexHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegexHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				854594FF257378EB00E96F97 /* SearchResultController.m */,
 				8545950425739B9F00E96F97 /* ServiceCaller.h */,
 				8545950525739B9F00E96F97 /* ServiceCaller.m */,
+				8545950725739D3200E96F97 /* RegexHelper.h */,
+				8545950825739D3200E96F97 /* RegexHelper.m */,
 			);
 			path = sonar;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */,
 				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
 				85459500257378EB00E96F97 /* SearchResultController.m in Sources */,
+				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
 				854594DC25736A0A00E96F97 /* main.m in Sources */,
 				854594CE25736A0700E96F97 /* AppDelegate.m in Sources */,
 			);

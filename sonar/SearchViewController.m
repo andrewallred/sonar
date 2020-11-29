@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #include <AVFoundation/AVFoundation.h>
 #import "ServiceCaller.h"
+#import "RegexHelper.h"
 
 @interface SearchViewController ()
 
@@ -71,7 +72,7 @@
     
     NSString *page = [ServiceCaller loadStringByUrl:url];
     
-    NSArray* albumMatches = [SearchViewController regexMatchesForString: page regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_\\/\"-<> \\t\\n\\r=]*<\\/a>"];
+    NSArray* albumMatches = [RegexHelper regexMatchesForString: page regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_\\/\"-<> \\t\\n\\r=]*<\\/a>"];
     
     NSString* albumUrl;
     for (NSTextCheckingResult *match in albumMatches) {
@@ -79,7 +80,7 @@
         
         NSString* albumSection = [page substringWithRange:matchRange];
         
-        NSArray* urlMatches = [SearchViewController regexMatchesForString: albumSection regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_-]*\">"];
+        NSArray* urlMatches = [RegexHelper regexMatchesForString: albumSection regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_-]*\">"];
         
         for (NSTextCheckingResult *urlMatch in urlMatches) {
             NSRange urlMatchRange = [urlMatch range];
@@ -102,31 +103,12 @@
     
 }
 
-+ (NSArray*) regexMatchesForString: (NSString*) inputString regex: (NSString*) regexString {
-    
-    NSError *error = NULL;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString
-                                                                           options:NSRegularExpressionCaseInsensitive
-                                                                             error:&error];
-    
-    //    NSUInteger numberOfMatches = [regex numberOfMatchesInString:inputString
-    //    options:0
-    //      range:NSMakeRange(0, [inputString length])];
-    
-    NSArray *matches = [regex matchesInString:inputString
-                                      options:0
-                                        range:NSMakeRange(0, [inputString length])];
-    
-    return matches;
-}
-
-
 - (void) loadAlbumPage:(NSString*) url {
     
     //@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"
     NSString *page = [ServiceCaller loadStringByUrl:url];
     
-    NSArray* matches = [SearchViewController regexMatchesForString: page regex:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"];
+    NSArray* matches = [RegexHelper regexMatchesForString: page regex:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"];
     
     NSString* audioUrl;
     for (NSTextCheckingResult *match in matches) {
