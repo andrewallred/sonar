@@ -8,6 +8,7 @@
 
 #import "SearchViewController.h"
 #include <AVFoundation/AVFoundation.h>
+#include <AVKit/AVKit.h>
 #import "ServiceCaller.h"
 #import "RegexHelper.h"
 
@@ -142,6 +143,15 @@ NSCache<NSString*, UIImage*> *imageCache;
     AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
     self.player = [AVPlayer playerWithPlayerItem:playerItem];
+    
+    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
+    playerViewController.player = self.player;
+    
+    // show the view controller
+    [self addChildViewController:playerViewController];
+    [self.view addSubview:playerViewController.view];
+    playerViewController.view.frame = self.view.frame;
+    
     [self.player play];
 }
 
