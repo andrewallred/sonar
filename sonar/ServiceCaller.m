@@ -76,5 +76,18 @@
     return data;
 }
 
++(NSString *) encodeParameter: (NSString *)unencodedString
+{
+    // Code provided by: https://ioscodeexamples.blogspot.com/2013/07/ios-url-encoding.html#ixzz2gORgtcbX
+    CFStringRef safeString = CFURLCreateStringByAddingPercentEscapes(NULL,
+                                            (__bridge  CFStringRef)unencodedString,
+                                            NULL,
+                                            CFSTR("/%&=?$#+-~@<>|\\*,.()[]{}^!"),
+                                            kCFStringEncodingUTF8);
+    // KA Note: CFStringRef's are toll-free bridged with NSString's - no need to create a new one
+    // The notation "__bridging_transfer" tells the compiler to transfer the +1 ownership from Core Foundation to ARC
+    // CFBridgingRelease() also could have been used to do the same thing
+    return (__bridge_transfer NSString *)safeString; //[NSString stringWithFormat:@"%@", safeString];
+}
 
 @end

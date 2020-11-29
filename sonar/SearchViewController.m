@@ -34,7 +34,7 @@
     NSLog(@"search term %@", _searchTextField.text);
     
     NSString *url = [NSString stringWithFormat:@"https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=%@",
-                     _searchTextField.text];
+                     [ServiceCaller encodeParameter:_searchTextField.text]];
     
     NSData* data = [ServiceCaller loadDataByUrl:url];
     
@@ -61,7 +61,7 @@
     
     NSString* url = o[@"url"];
 
-    url = [NSString stringWithFormat:@"%@/music", url];
+    url = [NSString stringWithFormat:@"%@/music", [ServiceCaller encodeParameter:url]];
 
     [self loadArtistPage:url];
     
