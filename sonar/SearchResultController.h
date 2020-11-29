@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SearchResultController.h
 //  sonar
 //
 //  Created by Allred, Andrew on 11/29/20.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface SearchResultController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END

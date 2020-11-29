@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		854594CE25736A0700E96F97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594CD25736A0700E96F97 /* AppDelegate.m */; };
-		854594D125736A0700E96F97 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594D025736A0700E96F97 /* ViewController.m */; };
+		854594D125736A0700E96F97 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594D025736A0700E96F97 /* SearchViewController.m */; };
 		854594D425736A0700E96F97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854594D225736A0700E96F97 /* Main.storyboard */; };
 		854594D625736A0A00E96F97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 854594D525736A0A00E96F97 /* Assets.xcassets */; };
 		854594D925736A0A00E96F97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854594D725736A0A00E96F97 /* LaunchScreen.storyboard */; };
 		854594DC25736A0A00E96F97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594DB25736A0A00E96F97 /* main.m */; };
 		854594E625736A0A00E96F97 /* sonarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594E525736A0A00E96F97 /* sonarTests.m */; };
 		854594F125736A0A00E96F97 /* sonarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594F025736A0A00E96F97 /* sonarUITests.m */; };
+		85459500257378EB00E96F97 /* SearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594FF257378EB00E96F97 /* SearchResultController.m */; };
+		8545950325737DFD00E96F97 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8545950225737DFD00E96F97 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +40,8 @@
 		854594C925736A0700E96F97 /* sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854594CC25736A0700E96F97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		854594CD25736A0700E96F97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		854594CF25736A0700E96F97 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		854594D025736A0700E96F97 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		854594CF25736A0700E96F97 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		854594D025736A0700E96F97 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		854594D325736A0700E96F97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		854594D525736A0A00E96F97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		854594D825736A0A00E96F97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,9 @@
 		854594EC25736A0A00E96F97 /* sonarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sonarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		854594F025736A0A00E96F97 /* sonarUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sonarUITests.m; sourceTree = "<group>"; };
 		854594F225736A0A00E96F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		854594FE257378EB00E96F97 /* SearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultController.h; sourceTree = "<group>"; };
+		854594FF257378EB00E96F97 /* SearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultController.m; sourceTree = "<group>"; };
+		8545950225737DFD00E96F97 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8545950325737DFD00E96F97 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +91,7 @@
 				854594E425736A0A00E96F97 /* sonarTests */,
 				854594EF25736A0A00E96F97 /* sonarUITests */,
 				854594CA25736A0700E96F97 /* Products */,
+				8545950125737DFD00E96F97 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,13 +110,15 @@
 			children = (
 				854594CC25736A0700E96F97 /* AppDelegate.h */,
 				854594CD25736A0700E96F97 /* AppDelegate.m */,
-				854594CF25736A0700E96F97 /* ViewController.h */,
-				854594D025736A0700E96F97 /* ViewController.m */,
+				854594CF25736A0700E96F97 /* SearchViewController.h */,
+				854594D025736A0700E96F97 /* SearchViewController.m */,
 				854594D225736A0700E96F97 /* Main.storyboard */,
 				854594D525736A0A00E96F97 /* Assets.xcassets */,
 				854594D725736A0A00E96F97 /* LaunchScreen.storyboard */,
 				854594DA25736A0A00E96F97 /* Info.plist */,
 				854594DB25736A0A00E96F97 /* main.m */,
+				854594FE257378EB00E96F97 /* SearchResultController.h */,
+				854594FF257378EB00E96F97 /* SearchResultController.m */,
 			);
 			path = sonar;
 			sourceTree = "<group>";
@@ -130,6 +139,14 @@
 				854594F225736A0A00E96F97 /* Info.plist */,
 			);
 			path = sonarUITests;
+			sourceTree = "<group>";
+		};
+		8545950125737DFD00E96F97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8545950225737DFD00E96F97 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +279,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				854594D125736A0700E96F97 /* ViewController.m in Sources */,
+				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
+				85459500257378EB00E96F97 /* SearchResultController.m in Sources */,
 				854594DC25736A0A00E96F97 /* main.m in Sources */,
 				854594CE25736A0700E96F97 /* AppDelegate.m in Sources */,
 			);
