@@ -20,6 +20,10 @@
 		8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950525739B9F00E96F97 /* ServiceCaller.m */; };
 		8545950925739D3200E96F97 /* RegexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950825739D3200E96F97 /* RegexHelper.m */; };
 		8545950B2574007A00E96F97 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8545950A2574007A00E96F97 /* AVKit.framework */; };
+		8545950E25740E0200E96F97 /* BandcampService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950D25740E0200E96F97 /* BandcampService.m */; };
+		854595152574137400E96F97 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 854595142574137400E96F97 /* Artist.m */; };
+		85459518257413CE00E96F97 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 85459517257413CE00E96F97 /* Album.m */; };
+		8545951B2574143300E96F97 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545951A2574143300E96F97 /* SearchResult.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,14 @@
 		8545950725739D3200E96F97 /* RegexHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegexHelper.h; sourceTree = "<group>"; };
 		8545950825739D3200E96F97 /* RegexHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegexHelper.m; sourceTree = "<group>"; };
 		8545950A2574007A00E96F97 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		8545950C25740E0200E96F97 /* BandcampService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandcampService.h; sourceTree = "<group>"; };
+		8545950D25740E0200E96F97 /* BandcampService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandcampService.m; sourceTree = "<group>"; };
+		854595132574137400E96F97 /* Artist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
+		854595142574137400E96F97 /* Artist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
+		85459516257413CE00E96F97 /* Album.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		85459517257413CE00E96F97 /* Album.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		854595192574143300E96F97 /* SearchResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
+		8545951A2574143300E96F97 /* SearchResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,21 +129,17 @@
 		854594CB25736A0700E96F97 /* sonar */ = {
 			isa = PBXGroup;
 			children = (
+				854595122574136100E96F97 /* Models */,
+				854595112574130F00E96F97 /* ViewControllers */,
+				85459510257412F600E96F97 /* Services */,
+				8545950F257412EE00E96F97 /* Helpers */,
 				854594CC25736A0700E96F97 /* AppDelegate.h */,
 				854594CD25736A0700E96F97 /* AppDelegate.m */,
-				854594CF25736A0700E96F97 /* SearchViewController.h */,
-				854594D025736A0700E96F97 /* SearchViewController.m */,
 				854594D225736A0700E96F97 /* Main.storyboard */,
 				854594D525736A0A00E96F97 /* Assets.xcassets */,
 				854594D725736A0A00E96F97 /* LaunchScreen.storyboard */,
 				854594DA25736A0A00E96F97 /* Info.plist */,
 				854594DB25736A0A00E96F97 /* main.m */,
-				854594FE257378EB00E96F97 /* SearchResultController.h */,
-				854594FF257378EB00E96F97 /* SearchResultController.m */,
-				8545950425739B9F00E96F97 /* ServiceCaller.h */,
-				8545950525739B9F00E96F97 /* ServiceCaller.m */,
-				8545950725739D3200E96F97 /* RegexHelper.h */,
-				8545950825739D3200E96F97 /* RegexHelper.m */,
 			);
 			path = sonar;
 			sourceTree = "<group>";
@@ -161,6 +169,50 @@
 				8545950225737DFD00E96F97 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8545950F257412EE00E96F97 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8545950725739D3200E96F97 /* RegexHelper.h */,
+				8545950825739D3200E96F97 /* RegexHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		85459510257412F600E96F97 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8545950425739B9F00E96F97 /* ServiceCaller.h */,
+				8545950525739B9F00E96F97 /* ServiceCaller.m */,
+				8545950C25740E0200E96F97 /* BandcampService.h */,
+				8545950D25740E0200E96F97 /* BandcampService.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		854595112574130F00E96F97 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				854594CF25736A0700E96F97 /* SearchViewController.h */,
+				854594D025736A0700E96F97 /* SearchViewController.m */,
+				854594FE257378EB00E96F97 /* SearchResultController.h */,
+				854594FF257378EB00E96F97 /* SearchResultController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		854595122574136100E96F97 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				854595132574137400E96F97 /* Artist.h */,
+				854595142574137400E96F97 /* Artist.m */,
+				85459516257413CE00E96F97 /* Album.h */,
+				85459517257413CE00E96F97 /* Album.m */,
+				854595192574143300E96F97 /* SearchResult.h */,
+				8545951A2574143300E96F97 /* SearchResult.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,10 +345,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8545951B2574143300E96F97 /* SearchResult.m in Sources */,
 				8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */,
 				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
 				85459500257378EB00E96F97 /* SearchResultController.m in Sources */,
+				854595152574137400E96F97 /* Artist.m in Sources */,
+				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,
 				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
+				85459518257413CE00E96F97 /* Album.m in Sources */,
 				854594DC25736A0A00E96F97 /* main.m in Sources */,
 				854594CE25736A0700E96F97 /* AppDelegate.m in Sources */,
 			);

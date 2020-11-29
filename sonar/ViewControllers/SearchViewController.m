@@ -9,8 +9,9 @@
 #import "SearchViewController.h"
 #include <AVFoundation/AVFoundation.h>
 #include <AVKit/AVKit.h>
-#import "ServiceCaller.h"
 #import "RegexHelper.h"
+#import "BandcampService.h"
+#import "ServiceCaller.h"
 
 @interface SearchViewController ()
 
@@ -38,21 +39,13 @@ NSCache<NSString*, UIImage*> *imageCache;
     
     NSLog(@"search term %@", _searchTextField.text);
     
-    NSString *url = [NSString stringWithFormat:@"https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=%@",
-                     [ServiceCaller encodeParameter:_searchTextField.text]];
-    
-    NSData* data = [ServiceCaller loadDataByUrl:url];
-    
-    NSDictionary *objects = [NSJSONSerialization
-                             JSONObjectWithData:data
-                             options:NSJSONReadingMutableLeaves
-                             error:nil];
+    NSDictionary *searchResults = [BandcampService loadSearchResults:_searchTextField.text];
     
     [self.searchResults removeAllObjects];
     
-    for (int i = 0; i < [objects[@"auto"][@"results"] count]; i++) {
+    for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
         
-        NSDictionary* searchResult = objects[@"auto"][@"results"][i];
+        NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
         if ([searchResult[@"type"] isEqualToString:@"b"]) {
             [self.searchResults addObject:searchResult];
         }

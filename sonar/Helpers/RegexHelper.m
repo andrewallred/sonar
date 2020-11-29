@@ -12,20 +12,26 @@
 
 + (NSArray*) regexMatchesForString: (NSString*) inputString regex: (NSString*) regexString {
     
+    NSMutableArray* matchResults = [[NSMutableArray alloc] init];
+    
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
     
-    //    NSUInteger numberOfMatches = [regex numberOfMatchesInString:inputString
-    //    options:0
-    //      range:NSMakeRange(0, [inputString length])];
-    
     NSArray *matches = [regex matchesInString:inputString
                                       options:0
                                         range:NSMakeRange(0, [inputString length])];
     
-    return matches;
+    for (NSTextCheckingResult *match in matches) {
+        
+        NSRange matchRange = [match range];
+        NSString* matchString = [inputString substringWithRange:matchRange];
+        [matchResults addObject:matchString];
+        
+    }
+    
+    return matchResults;
 }
 
 @end
