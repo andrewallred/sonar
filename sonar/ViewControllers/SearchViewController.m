@@ -22,8 +22,8 @@
 @implementation SearchViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.searchTableView.delegate = self;
     self.searchTableView.dataSource = self;
@@ -66,86 +66,21 @@ NSCache<NSString*, UIImage*> *imageCache;
 
     url = [NSString stringWithFormat:@"%@/music", url];
 
-    [self loadArtistPage:url];
+    //[self loadArtistPage:url];
+    Artist* artist = [BandcampService loadArtist:url];
     
-}
-
-- (void) loadArtistPage: (NSString*) url {
-    
-    NSString *page = [ServiceCaller loadStringByUrl:url];
-    
-    NSArray* albumMatches = [RegexHelper regexMatchesForString: page regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_\\/\"-<> \\t\\n\\r=]*<\\/a>"];
-    
-    NSString* albumUrl;
-    for (NSTextCheckingResult *match in albumMatches) {
-        NSRange matchRange = [match range];
+    if ([artist.Albums count] > 0) {
+        Album* album = [BandcampService loadAlbum:artist.Albums[0].Url];
         
-        NSString* albumSection = [page substringWithRange:matchRange];
-        
-        NSArray* urlMatches = [RegexHelper regexMatchesForString: albumSection regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_-]*\">"];
-        
-        for (NSTextCheckingResult *urlMatch in urlMatches) {
-            NSRange urlMatchRange = [urlMatch range];
-            albumUrl = [albumSection substringWithRange:urlMatchRange];
+        if ([album.Songs count] > 0) {
+            [self playAudio:album.Songs[0] onAlbum:album];
         }
-        
-        if (albumUrl != nil) {
-            break;
-        }
-        
-    }
-    
-    if (albumUrl != nil) {
-        url = [url stringByReplacingOccurrencesOfString:@"/music" withString:@""];
-        albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:url];
-        albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"\">" withString:@""];
-        
-        coverUrl = nil;
-        [self loadAlbumPage:albumUrl];
     }
     
 }
 
-NSString* coverUrl;
-- (void) loadAlbumPage:(NSString*) url {
-    
-    //@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"
-    NSString *page = [ServiceCaller loadStringByUrl:url];
-    
-    NSArray* songMatches = [RegexHelper regexMatchesForString: page regex:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"];
-    
-    NSString* audioUrl;
-    for (NSTextCheckingResult *match in songMatches) {
-        NSRange matchRange = [match range];
-        
-        audioUrl = [page substringWithRange:matchRange];
-        audioUrl = [audioUrl stringByReplacingOccurrencesOfString:@"&quot;" withString:@""];
-        audioUrl = [audioUrl stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
-        
-        NSLog(@"%@", [page substringWithRange:matchRange]);
-        
-        break;
-    }
-    
-    NSArray* coverMatches = [RegexHelper regexMatchesForString: page regex:@"<a class=\"popupImage\" href=\"[a-zA-Z0-9_:\\/.-]*"];
-    for (NSTextCheckingResult *match in coverMatches) {
-        NSRange matchRange = [match range];
-        
-        coverUrl = [page substringWithRange:matchRange];
-        coverUrl = [coverUrl stringByReplacingOccurrencesOfString:@"<a class=\"popupImage\" href=\"" withString:@""];
-
-        break;
-    }
-
-    
-    if (audioUrl != nil) {
-        [self playAudio:audioUrl];
-    }
-    
-}
-
-- (void) playAudio: (NSString*) urlString {
-    NSURL *url = [NSURL URLWithString:urlString];
+- (void) playAudio: (Song*) song onAlbum:(Album*) album {
+    NSURL *url = [NSURL URLWithString:song.AudioUrl];
     
     AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
@@ -159,14 +94,13 @@ NSString* coverUrl;
     [self.view addSubview:playerViewController.view];
     playerViewController.view.frame = self.view.frame;
     
-    
-    if (coverUrl != nil) {
+    if (album.ImageUrl != nil) {
         
-        UIImage* cachedImage = [imageCache objectForKey:coverUrl];
+        UIImage* cachedImage = [imageCache objectForKey:album.ImageUrl];
         if (cachedImage == nil) {
-            NSData* imageData = [ServiceCaller loadDataByUrl:coverUrl];
+            NSData* imageData = [ServiceCaller loadDataByUrl:album.ImageUrl];
             cachedImage = [UIImage imageWithData:imageData];
-            [imageCache setObject:cachedImage forKey:coverUrl];
+            [imageCache setObject:cachedImage forKey:album.ImageUrl];
         }
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:cachedImage];

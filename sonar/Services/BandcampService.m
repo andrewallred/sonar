@@ -47,9 +47,10 @@
         
         for (NSString *urlMatch in albumUrlMatches) {
             
-            NSString* albumUrl = urlMatch;
+            NSString* albumUrl = [NSString stringWithFormat:@"%@%@", url, urlMatch];
+            
             albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"/music" withString:@""];
-            albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:url];
+            albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:@""];
             albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"\">" withString:@""];
             
             Album* album = [[Album alloc] init];
