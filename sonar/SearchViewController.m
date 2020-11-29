@@ -65,7 +65,7 @@ NSCache<NSString*, UIImage*> *imageCache;
     
     NSString* url = o[@"url"];
 
-    url = [NSString stringWithFormat:@"%@/music", [ServiceCaller encodeParameter:url]];
+    url = [NSString stringWithFormat:@"%@/music", url];
 
     [self loadArtistPage:url];
     
