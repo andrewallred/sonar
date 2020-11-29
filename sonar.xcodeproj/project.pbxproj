@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		850B747325745C7E000B9D17 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747225745C7E000B9D17 /* Song.m */; };
 		854594CE25736A0700E96F97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594CD25736A0700E96F97 /* AppDelegate.m */; };
 		854594D125736A0700E96F97 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594D025736A0700E96F97 /* SearchViewController.m */; };
 		854594D425736A0700E96F97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854594D225736A0700E96F97 /* Main.storyboard */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		850B747125745C7E000B9D17 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		850B747225745C7E000B9D17 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		854594C925736A0700E96F97 /* sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854594CC25736A0700E96F97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		854594CD25736A0700E96F97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				85459517257413CE00E96F97 /* Album.m */,
 				854595192574143300E96F97 /* SearchResult.h */,
 				8545951A2574143300E96F97 /* SearchResult.m */,
+				850B747125745C7E000B9D17 /* Song.h */,
+				850B747225745C7E000B9D17 /* Song.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
 				85459500257378EB00E96F97 /* SearchResultController.m in Sources */,
 				854595152574137400E96F97 /* Artist.m in Sources */,
+				850B747325745C7E000B9D17 /* Song.m in Sources */,
 				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,
 				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
 				85459518257413CE00E96F97 /* Album.m in Sources */,

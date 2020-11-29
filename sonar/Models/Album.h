@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Song.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* ImageUrl;
 @property (nonatomic, strong) NSString* Name;
 @property (nonatomic, strong) NSString* Url;
+@property (nonatomic, strong) NSMutableArray<Song*>* Songs;
 
 @end
 

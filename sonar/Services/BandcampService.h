@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ArtistPage.h"
+#import "Artist.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BandcampService : NSObject
 
 +(NSDictionary*) loadSearchResults:(NSString *)urlString;
-
-+(ArtistPage*) loadArtistPage: (NSString*) url;
++(Artist*) loadArtist: (NSString*) url;
++(Album*) loadAlbum: (NSString*) url;
 
 @end
 
