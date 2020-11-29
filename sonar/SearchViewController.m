@@ -93,7 +93,6 @@
         
     }
     
-    //<a href="/album/loops">
     if (albumUrl != nil) {
         url = [url stringByReplacingOccurrencesOfString:@"/music" withString:@""];
         albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:url];
