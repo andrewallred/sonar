@@ -44,7 +44,7 @@
 
 +(NSData*) loadDataByUrl:(NSString *)urlString
 {
-    return [self loadDataByUrl:urlString Accept:@"application/json"];
+    return [self loadDataByUrl:urlString Accept:nil];
 }
 
 +(NSData*) loadDataByUrl:(NSString *)urlString Accept:(NSString*)accept
