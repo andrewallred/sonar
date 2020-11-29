@@ -106,20 +106,23 @@ NSCache<NSString*, UIImage*> *imageCache;
         url = [url stringByReplacingOccurrencesOfString:@"/music" withString:@""];
         albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:url];
         albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"\">" withString:@""];
+        
+        coverUrl = nil;
         [self loadAlbumPage:albumUrl];
     }
     
 }
 
+NSString* coverUrl;
 - (void) loadAlbumPage:(NSString*) url {
     
     //@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"
     NSString *page = [ServiceCaller loadStringByUrl:url];
     
-    NSArray* matches = [RegexHelper regexMatchesForString: page regex:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"];
+    NSArray* songMatches = [RegexHelper regexMatchesForString: page regex:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"];
     
     NSString* audioUrl;
-    for (NSTextCheckingResult *match in matches) {
+    for (NSTextCheckingResult *match in songMatches) {
         NSRange matchRange = [match range];
         
         audioUrl = [page substringWithRange:matchRange];
@@ -130,6 +133,17 @@ NSCache<NSString*, UIImage*> *imageCache;
         
         break;
     }
+    
+    NSArray* coverMatches = [RegexHelper regexMatchesForString: page regex:@"<a class=\"popupImage\" href=\"[a-zA-Z0-9_:\\/.-]*"];
+    for (NSTextCheckingResult *match in coverMatches) {
+        NSRange matchRange = [match range];
+        
+        coverUrl = [page substringWithRange:matchRange];
+        coverUrl = [coverUrl stringByReplacingOccurrencesOfString:@"<a class=\"popupImage\" href=\"" withString:@""];
+
+        break;
+    }
+
     
     if (audioUrl != nil) {
         [self playAudio:audioUrl];
@@ -151,6 +165,22 @@ NSCache<NSString*, UIImage*> *imageCache;
     [self addChildViewController:playerViewController];
     [self.view addSubview:playerViewController.view];
     playerViewController.view.frame = self.view.frame;
+    
+    
+    if (coverUrl != nil) {
+        
+        UIImage* cachedImage = [imageCache objectForKey:coverUrl];
+        if (cachedImage == nil) {
+            NSData* imageData = [ServiceCaller loadDataByUrl:coverUrl];
+            cachedImage = [UIImage imageWithData:imageData];
+            [imageCache setObject:cachedImage forKey:coverUrl];
+        }
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:cachedImage];
+        
+        [playerViewController.contentOverlayView addSubview:imageView];
+        
+    }
     
     [self.player play];
 }

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(NSString*) loadStringByUrl:(NSString *)urlString;
 +(NSMutableDictionary *) loadJsonByUrl:(NSString *)urlString withTimeoutInterval:(NSTimeInterval)timeout;
+
 +(NSData*) loadDataByUrl:(NSString *)urlString;
 +(NSData*) loadDataByUrl:(NSString *)urlString Accept:(NSString*)accept;
 +(NSData*) loadDataByUrl:(NSString *)urlString Accept:(NSString*)accept withTimeoutInterval:(NSTimeInterval)timeout;
