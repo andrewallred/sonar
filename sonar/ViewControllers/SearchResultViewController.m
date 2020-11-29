@@ -1,18 +1,18 @@
 //
-//  SearchResultController.m
+//  SearchResultViewController.m
 //  sonar
 //
 //  Created by Allred, Andrew on 11/29/20.
 //  Copyright © 2020 Allred, Andrew. All rights reserved.
 //
 
-#import "SearchResultController.h"
+#import "SearchResultViewController.h"
 
-@interface SearchResultController ()
+@interface SearchResultViewController ()
 
 @end
 
-@implementation SearchResultController
+@implementation SearchResultViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -48,45 +48,35 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
                     </view>
+                    <navigationItem key="navigationItem" id="8YN-7k-TzH"/>
                     <connections>
                         <outlet property="searchTableView" destination="qVr-Aa-5PT" id="FRF-Jw-7fi"/>
                         <outlet property="searchTextField" destination="wsP-60-iHH" id="uZ9-Ug-oEq"/>
+                        <segue destination="cgZ-iB-500" kind="show" identifier="SearchResultSegue" id="h0u-es-6UU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1543" y="-137"/>
+            <point key="canvasLocation" x="-1092" y="118"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="U82-fV-hnw">
+        <!--View Controller-->
+        <scene sceneID="muz-5c-a8d">
             <objects>
-                <tableViewController id="DgR-zn-EfX" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" id="Gz1-Jy-qAg">
+                <viewController id="cgZ-iB-500" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9M9-fk-ZvV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xyb-Ws-Tde"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LY9-2W-NbK">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wDV-qa-pjx">
-                                <rect key="frame" x="106" y="66" width="1708" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wDV-qa-pjx" id="CdQ-AA-7Wp">
-                                    <rect key="frame" x="0.0" y="0.0" width="1708" height="66"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="DgR-zn-EfX" id="pY2-6J-QnF"/>
-                            <outlet property="delegate" destination="DgR-zn-EfX" id="TBT-1m-eYV"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Sa5-Qv-HwK"/>
-                    <connections>
-                        <outlet property="tabBarObservedScrollView" destination="Gz1-Jy-qAg" id="4Pi-fE-kdC"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kve-VX-AMB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <viewLayoutGuide key="safeArea" id="jox-av-lAj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gU3-4u-gYD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7LH-aJ-Sds" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-972" y="744"/>
+            <point key="canvasLocation" x="1353" y="118"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s9F-lp-vgY">
@@ -97,30 +87,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="DgR-zn-EfX" kind="relationship" relationship="rootViewController" id="3i6-ar-3KG"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uNA-CM-l0j"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ogk-0l-Hvd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3113" y="744"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ZiZ-PT-AjE">
-            <objects>
-                <viewController id="9ec-yG-b87" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wcA-QF-yeR"/>
-                        <viewControllerLayoutGuide type="bottom" id="eZb-Yv-bFn"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hUa-DL-UUu">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="djC-aC-gGz"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cm5-Zf-Hh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1543" y="1147"/>
+            <point key="canvasLocation" x="-3302" y="118"/>
         </scene>
     </scenes>
 </document>

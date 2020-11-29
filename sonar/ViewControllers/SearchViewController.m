@@ -66,17 +66,18 @@ NSCache<NSString*, UIImage*> *imageCache;
 
     url = [NSString stringWithFormat:@"%@/music", url];
 
-    //[self loadArtistPage:url];
-    Artist* artist = [BandcampService loadArtist:url];
-    
-    if ([artist.Albums count] > 0) {
-        Album* album = [BandcampService loadAlbum:artist.Albums[0].Url];
-        
-        if ([album.Songs count] > 0) {
-            [self playAudio:album.Songs[0] onAlbum:album];
-        }
-    }
-    
+//    //[self loadArtistPage:url];
+//    Artist* artist = [BandcampService loadArtist:url];
+//
+//    if ([artist.Albums count] > 0) {
+//        Album* album = [BandcampService loadAlbum:artist.Albums[0].Url];
+//
+//        if ([album.Songs count] > 0) {
+//            [self playAudio:album.Songs[0] onAlbum:album];
+//        }
+//
+//    }
+    [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }
 
 - (void) playAudio: (Song*) song onAlbum:(Album*) album {
