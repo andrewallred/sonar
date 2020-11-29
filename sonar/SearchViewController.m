@@ -50,7 +50,12 @@ NSCache<NSString*, UIImage*> *imageCache;
     [self.searchResults removeAllObjects];
     
     for (int i = 0; i < [objects[@"auto"][@"results"] count]; i++) {
-        [self.searchResults addObject:objects[@"auto"][@"results"][i]];
+        
+        NSDictionary* searchResult = objects[@"auto"][@"results"][i];
+        if ([searchResult[@"type"] isEqualToString:@"b"]) {
+            [self.searchResults addObject:searchResult];
+        }
+        
     }
     
     [self.searchTableView reloadData];
