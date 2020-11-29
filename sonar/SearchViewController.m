@@ -33,7 +33,7 @@
 NSCache<NSString*, UIImage*> *imageCache;
 - (IBAction)searchEditingDidEnd:(id)sender {
     
-    imageCache = [NSCache<NSString*, UIImage*> init];
+    imageCache = [[NSCache<NSString*, UIImage*> alloc] init];
     
     NSLog(@"search term %@", _searchTextField.text);
     
@@ -153,7 +153,8 @@ NSCache<NSString*, UIImage*> *imageCache;
     UIImage* cachedImage = [imageCache objectForKey:imageUrl];
     if (cachedImage == nil) {
         NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
-        [imageCache setObject:[UIImage imageWithData:imageData] forKey:imageUrl];
+        cachedImage = [UIImage imageWithData:imageData];
+        [imageCache setObject:cachedImage forKey:imageUrl];
     }
     
     cell.imageView.image = cachedImage;
