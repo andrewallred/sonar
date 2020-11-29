@@ -30,7 +30,10 @@
     
 }
 
+NSCache<NSString*, UIImage*> *imageCache;
 - (IBAction)searchEditingDidEnd:(id)sender {
+    
+    imageCache = [NSCache<NSString*, UIImage*> init];
     
     NSLog(@"search term %@", _searchTextField.text);
     
@@ -142,7 +145,18 @@
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [self.searchResults allObjects][indexPath.row][@"name"];
+    NSDictionary* resultItem = [self.searchResults allObjects][indexPath.row];
+    
+    cell.textLabel.text = resultItem[@"name"];
+    
+    NSString* imageUrl = resultItem[@"img"];
+    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
+    if (cachedImage == nil) {
+        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
+        [imageCache setObject:[UIImage imageWithData:imageData] forKey:imageUrl];
+    }
+    
+    cell.imageView.image = cachedImage;
     
     return cell;
 }
