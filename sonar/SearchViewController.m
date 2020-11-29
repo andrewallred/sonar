@@ -38,34 +38,87 @@
     NSData* data = [SearchViewController loadDataByUrl:url];
     
     NSDictionary *objects = [NSJSONSerialization
-    JSONObjectWithData:data
-    options:NSJSONReadingMutableLeaves
-    error:nil];
+                             JSONObjectWithData:data
+                             options:NSJSONReadingMutableLeaves
+                             error:nil];
     
     [self.searchResults removeAllObjects];
     
     for (int i = 0; i < [objects[@"auto"][@"results"] count]; i++) {
-        [self.searchResults addObject:objects[@"auto"][@"results"][i][@"name"]];
+        [self.searchResults addObject:objects[@"auto"][@"results"][i]];
     }
     
     [self.searchTableView reloadData];
     
-    //[self playAudio];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self loadAlbumPage];
+    NSInteger selectedRow = [indexPath row];
+    
+    NSDictionary* o = [self.searchResults allObjects][selectedRow];
+    
+    NSString* url = o[@"url"];
+
+    url = [NSString stringWithFormat:@"%@/music", url];
+
+    [self loadArtistPage:url];
     
 }
 
-- (void) loadArtistPage {
+- (void) loadArtistPage: (NSString*) url {
     
-//    NSString *page = [SearchViewController loadDataByUrl:<#(NSString *)#>]
-//
-//    NSError *error = NULL;
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\b(a|b)(c|d)\\b"
-//                                                                           options:NSRegularExpressionCaseInsensitive
-//                                                                             error:&error];
+    NSString *page = [SearchViewController loadStringByUrl:url];
+    
+    NSArray* albumMatches = [SearchViewController regexMatchesForString: page regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_\\/\"-<> \\t\\n\\r=]*<\\/a>"];
+    
+    NSString* albumUrl;
+    for (NSTextCheckingResult *match in albumMatches) {
+        NSRange matchRange = [match range];
+        
+        NSString* albumSection = [page substringWithRange:matchRange];
+        
+        NSArray* urlMatches = [SearchViewController regexMatchesForString: albumSection regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_-]*\">"];
+        
+        for (NSTextCheckingResult *urlMatch in urlMatches) {
+            NSRange urlMatchRange = [urlMatch range];
+            albumUrl = [albumSection substringWithRange:urlMatchRange];
+        }
+        
+        if (albumUrl != nil) {
+            break;
+        }
+        
+    }
+    
+    //<a href="/album/loops">
+    if (albumUrl != nil) {
+        url = [url stringByReplacingOccurrencesOfString:@"/music" withString:@""];
+        albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:url];
+        albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"\">" withString:@""];
+        [self loadAlbumPage:albumUrl];
+    }
     
 }
+
++ (NSArray*) regexMatchesForString: (NSString*) inputString regex: (NSString*) regexString {
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    
+    //    NSUInteger numberOfMatches = [regex numberOfMatchesInString:inputString
+    //    options:0
+    //      range:NSMakeRange(0, [inputString length])];
+    
+    NSArray *matches = [regex matchesInString:inputString
+                                      options:0
+                                        range:NSMakeRange(0, [inputString length])];
+    
+    return matches;
+}
+
 
 +(NSString*) loadStringByUrl:(NSString *)urlString
 {
@@ -79,27 +132,16 @@
     return str;
 }
 
-- (void) loadAlbumPage {
+- (void) loadAlbumPage:(NSString*) url {
     
-    NSString *page = [SearchViewController loadStringByUrl:@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"];
-
-    NSError *error = NULL;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"
-                                                                           options:NSRegularExpressionCaseInsensitive
-                                                                             error:&error];
+    //@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"
+    NSString *page = [SearchViewController loadStringByUrl:url];
     
-    NSUInteger numberOfMatches = [regex numberOfMatchesInString:page
-    options:0
-      range:NSMakeRange(0, [page length])];
+    NSArray* matches = [SearchViewController regexMatchesForString: page regex:@"&quot;https:\\/\\/t4\\.bcbits\\.com[a-zA-Z0-9_\\/-]*\\?[a-zA-Z0-9_\\/-=&]*&quot;"];
     
-    
-    
-    NSArray *matches = [regex matchesInString:page
-                                      options:0
-                                        range:NSMakeRange(0, [page length])];
     NSString* audioUrl;
     for (NSTextCheckingResult *match in matches) {
-         NSRange matchRange = [match range];
+        NSRange matchRange = [match range];
         
         audioUrl = [page substringWithRange:matchRange];
         audioUrl = [audioUrl stringByReplacingOccurrencesOfString:@"&quot;" withString:@""];
@@ -130,11 +172,7 @@
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [self.searchResults allObjects][indexPath.row];
-    
-    //cell.LabelTicketNumber.text = [self.searchResults allObjects][indexPath.row];
-    
-    // cell.LabelTicketType.text = @"Tessitura";
+    cell.textLabel.text = [self.searchResults allObjects][indexPath.row][@"name"];
     
     return cell;
 }
@@ -163,7 +201,7 @@
         return nil;
     }
     
-     return objects;
+    return objects;
 }
 
 +(NSData*) loadDataByUrl:(NSString *)urlString
