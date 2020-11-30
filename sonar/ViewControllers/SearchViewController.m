@@ -11,6 +11,7 @@
 #import "BandcampService.h"
 #import "ServiceCaller.h"
 #import "SearchResultViewController.h"
+#import "CachedImageHelper.h"
 
 @interface SearchViewController ()
 
@@ -29,10 +30,7 @@
     
 }
 
-NSCache<NSString*, UIImage*> *imageCache;
 - (IBAction)searchEditingDidEnd:(id)sender {
-    
-    imageCache = [[NSCache<NSString*, UIImage*> alloc] init];
     
     NSLog(@"search term %@", _searchTextField.text);
     
@@ -90,14 +88,7 @@ NSString* searchResultUrl;
     cell.textLabel.text = resultItem[@"name"];
     
     NSString* imageUrl = resultItem[@"img"];
-    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
-    if (cachedImage == nil) {
-        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
-        cachedImage = [UIImage imageWithData:imageData];
-        [imageCache setObject:cachedImage forKey:imageUrl];
-    }
-    
-    cell.imageView.image = cachedImage;
+    cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];
     
     return cell;
 }

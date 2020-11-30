@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		850B747325745C7E000B9D17 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747225745C7E000B9D17 /* Song.m */; };
 		850B747625748E77000B9D17 /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747525748E77000B9D17 /* AlbumViewController.m */; };
+		852BC6CE2574B5F400288B9A /* CachedImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 852BC6CD2574B5F400288B9A /* CachedImageHelper.m */; };
 		854594CE25736A0700E96F97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594CD25736A0700E96F97 /* AppDelegate.m */; };
 		854594D125736A0700E96F97 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594D025736A0700E96F97 /* SearchViewController.m */; };
 		854594D425736A0700E96F97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854594D225736A0700E96F97 /* Main.storyboard */; };
@@ -50,6 +51,8 @@
 		850B747225745C7E000B9D17 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		850B747425748E77000B9D17 /* AlbumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
 		850B747525748E77000B9D17 /* AlbumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
+		852BC6CC2574B5F400288B9A /* CachedImageHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CachedImageHelper.h; sourceTree = "<group>"; };
+		852BC6CD2574B5F400288B9A /* CachedImageHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CachedImageHelper.m; sourceTree = "<group>"; };
 		854594C925736A0700E96F97 /* sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854594CC25736A0700E96F97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		854594CD25736A0700E96F97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 			children = (
 				8545950725739D3200E96F97 /* RegexHelper.h */,
 				8545950825739D3200E96F97 /* RegexHelper.m */,
+				852BC6CC2574B5F400288B9A /* CachedImageHelper.h */,
+				852BC6CD2574B5F400288B9A /* CachedImageHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				850B747325745C7E000B9D17 /* Song.m in Sources */,
 				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,
 				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
+				852BC6CE2574B5F400288B9A /* CachedImageHelper.m in Sources */,
 				850B747625748E77000B9D17 /* AlbumViewController.m in Sources */,
 				85459518257413CE00E96F97 /* Album.m in Sources */,
 				854594DC25736A0A00E96F97 /* main.m in Sources */,

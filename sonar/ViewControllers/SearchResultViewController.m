@@ -8,6 +8,7 @@
 
 #import "SearchResultViewController.h"
 #import "AlbumViewController.h"
+#import "CachedImageHelper.h"
 
 @interface SearchResultViewController ()
 
@@ -26,7 +27,6 @@
     [self.albumsTableView reloadData];
 }
 
-NSCache<NSString*, UIImage*> *imageCache2;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"UITableViewCell";
@@ -37,14 +37,7 @@ NSCache<NSString*, UIImage*> *imageCache2;
     cell.textLabel.text = album.name;
     
     NSString* imageUrl = album.imageUrl;
-    UIImage* cachedImage = [imageCache2 objectForKey:imageUrl];
-    if (cachedImage == nil) {
-        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
-        cachedImage = [UIImage imageWithData:imageData];
-        [imageCache2 setObject:cachedImage forKey:imageUrl];
-    }
-    
-    cell.imageView.image = cachedImage;
+    cell.imageView.image = cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];;
     
     return cell;
 }
