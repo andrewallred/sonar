@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		850B747325745C7E000B9D17 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747225745C7E000B9D17 /* Song.m */; };
+		850B747625748E77000B9D17 /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747525748E77000B9D17 /* AlbumViewController.m */; };
 		854594CE25736A0700E96F97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594CD25736A0700E96F97 /* AppDelegate.m */; };
 		854594D125736A0700E96F97 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594D025736A0700E96F97 /* SearchViewController.m */; };
 		854594D425736A0700E96F97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854594D225736A0700E96F97 /* Main.storyboard */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		850B747125745C7E000B9D17 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		850B747225745C7E000B9D17 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		850B747425748E77000B9D17 /* AlbumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		850B747525748E77000B9D17 /* AlbumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		854594C925736A0700E96F97 /* sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854594CC25736A0700E96F97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		854594CD25736A0700E96F97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				854594D025736A0700E96F97 /* SearchViewController.m */,
 				854594FE257378EB00E96F97 /* SearchResultViewController.h */,
 				854594FF257378EB00E96F97 /* SearchResultViewController.m */,
+				850B747425748E77000B9D17 /* AlbumViewController.h */,
+				850B747525748E77000B9D17 /* AlbumViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				850B747325745C7E000B9D17 /* Song.m in Sources */,
 				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,
 				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
+				850B747625748E77000B9D17 /* AlbumViewController.m in Sources */,
 				85459518257413CE00E96F97 /* Album.m in Sources */,
 				854594DC25736A0A00E96F97 /* main.m in Sources */,
 				854594CE25736A0700E96F97 /* AppDelegate.m in Sources */,

@@ -7,15 +7,12 @@
 //
 
 #import "SearchViewController.h"
-#include <AVFoundation/AVFoundation.h>
-#include <AVKit/AVKit.h>
 #import "RegexHelper.h"
 #import "BandcampService.h"
 #import "ServiceCaller.h"
+#import "SearchResultViewController.h"
 
 @interface SearchViewController ()
-
-@property (strong, nonatomic) AVPlayer *player;
 
 @end
 
@@ -56,6 +53,7 @@ NSCache<NSString*, UIImage*> *imageCache;
     
 }
 
+NSString* SearchResultUrl;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
@@ -65,52 +63,21 @@ NSCache<NSString*, UIImage*> *imageCache;
     NSString* url = o[@"url"];
 
     url = [NSString stringWithFormat:@"%@/music", url];
-
-//    //[self loadArtistPage:url];
-//    Artist* artist = [BandcampService loadArtist:url];
-//
-//    if ([artist.Albums count] > 0) {
-//        Album* album = [BandcampService loadAlbum:artist.Albums[0].Url];
-//
-//        if ([album.Songs count] > 0) {
-//            [self playAudio:album.Songs[0] onAlbum:album];
-//        }
-//
-//    }
+    
+    SearchResultUrl = url;
+    
     [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }
 
-- (void) playAudio: (Song*) song onAlbum:(Album*) album {
-    NSURL *url = [NSURL URLWithString:song.AudioUrl];
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [super prepareForSegue:segue sender:sender];
     
-    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
-    self.player = [AVPlayer playerWithPlayerItem:playerItem];
-    
-    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
-    playerViewController.player = self.player;
-    
-    // show the view controller
-    [self addChildViewController:playerViewController];
-    [self.view addSubview:playerViewController.view];
-    playerViewController.view.frame = self.view.frame;
-    
-    if (album.ImageUrl != nil) {
-        
-        UIImage* cachedImage = [imageCache objectForKey:album.ImageUrl];
-        if (cachedImage == nil) {
-            NSData* imageData = [ServiceCaller loadDataByUrl:album.ImageUrl];
-            cachedImage = [UIImage imageWithData:imageData];
-            [imageCache setObject:cachedImage forKey:album.ImageUrl];
-        }
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:cachedImage];
-        
-        [playerViewController.contentOverlayView addSubview:imageView];
-        
+    UIViewController *destinationViewController = segue.destinationViewController;
+    if ([destinationViewController isKindOfClass:[SearchResultViewController class]])
+    {
+        ((SearchResultViewController *)destinationViewController).SearchResultUrl = SearchResultUrl;
     }
-    
-    [self.player play];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

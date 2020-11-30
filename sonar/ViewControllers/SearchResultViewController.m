@@ -7,6 +7,7 @@
 //
 
 #import "SearchResultViewController.h"
+#import "AlbumViewController.h"
 
 @interface SearchResultViewController ()
 
@@ -16,17 +17,64 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.albumsTableView.delegate = self;
+    self.albumsTableView.dataSource = self;
+    
+    self.Artist = [BandcampService loadArtist:_SearchResultUrl];
+    
+    [self.albumsTableView reloadData];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+NSCache<NSString*, UIImage*> *imageCache2;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"UITableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    Album* album = self.Artist.Albums[indexPath.row];
+    
+    cell.textLabel.text = album.Url;
+    
+    NSString* imageUrl = album.ImageUrl;
+    UIImage* cachedImage = [imageCache2 objectForKey:imageUrl];
+    if (cachedImage == nil) {
+        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
+        cachedImage = [UIImage imageWithData:imageData];
+        [imageCache2 setObject:cachedImage forKey:imageUrl];
+    }
+    
+    cell.imageView.image = cachedImage;
+    
+    return cell;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [self.Artist.Albums count];
+}
+
+NSString* AlbumUrl;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger selectedRow = [indexPath row];
+    
+    Album* album = self.Artist.Albums[selectedRow];
+    AlbumUrl = album.Url;
+    
+    [self performSegueWithIdentifier:@"AlbumSegue" sender:self];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [super prepareForSegue:segue sender:sender];
+    
+    UIViewController *destinationViewController = segue.destinationViewController;
+    if ([destinationViewController isKindOfClass:[AlbumViewController class]])
+    {
+        ((AlbumViewController *)destinationViewController).AlbumUrl = AlbumUrl;
+    }
+}
 
 @end
