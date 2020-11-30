@@ -42,6 +42,8 @@
     
     for (NSString *albumSectionMatch in albumSectionMatches) {
         
+        Album* album = [[Album alloc] init];
+        
         NSArray* albumUrlMatches = [RegexHelper regexMatchesForString: albumSectionMatch regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_-]*\">"];
         
         for (NSString *urlMatch in albumUrlMatches) {
@@ -52,12 +54,41 @@
             albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"<a href=\"" withString:@""];
             albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"\">" withString:@""];
             
-            Album* album = [[Album alloc] init];
             album.url = albumUrl;
             
-            [artist.albums addObject:album];
+        }
+        
+        //<img src="[a-zA-Z0-9_\/\"-<> \t\n\r=]* \/>
+        
+        NSArray* albumImageMatches = [RegexHelper regexMatchesForString: albumSectionMatch regex:@"<img src=\"[a-zA-Z0-9_\\/\\\"-<> \\t\\n\\r=]* \\/>"];
+        
+        for (NSString *urlMatch in albumImageMatches) {
+            
+            NSString* albumImageUrl = urlMatch;
+            
+            albumImageUrl = [albumImageUrl stringByReplacingOccurrencesOfString:@"<img src=\"" withString:@""];
+            albumImageUrl = [albumImageUrl stringByReplacingOccurrencesOfString:@"\" alt=\"\" \/>" withString:@""];
+            
+            album.imageUrl = albumImageUrl;
             
         }
+        
+        //<p class="title">[a-zA-Z0-9_\/\"-<> \t\n\r=]*\<\/p>
+        
+        NSArray* albumNameMatches = [RegexHelper regexMatchesForString: albumSectionMatch regex:@"<p class=\"title\">[a-zA-Z0-9_\\/\\\"-<> \\t\\n\\r=]*\\<\\/p>"];
+        
+        for (NSString *nameMatch in albumNameMatches) {
+            
+            NSString* albumName = nameMatch;
+            
+            albumName = [albumName stringByReplacingOccurrencesOfString:@"<p class=\"title\">" withString:@""];
+            albumName = [albumName stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
+            
+            album.name = [albumName stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            
+        }
+        
+        [artist.albums addObject:album];
         
     }
     

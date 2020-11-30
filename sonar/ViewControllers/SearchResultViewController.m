@@ -34,7 +34,7 @@ NSCache<NSString*, UIImage*> *imageCache2;
     
     Album* album = self.artist.albums[indexPath.row];
     
-    cell.textLabel.text = album.url;
+    cell.textLabel.text = album.name;
     
     NSString* imageUrl = album.imageUrl;
     UIImage* cachedImage = [imageCache2 objectForKey:imageUrl];
