@@ -44,15 +44,15 @@
     
     cell.textLabel.text = song.audioUrl;
     
-//    NSString* imageUrl = resultItem[@"img"];
-//    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
-//    if (cachedImage == nil) {
-//        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
-//        cachedImage = [UIImage imageWithData:imageData];
-//        [imageCache setObject:cachedImage forKey:imageUrl];
-//    }
+    //    NSString* imageUrl = resultItem[@"img"];
+    //    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
+    //    if (cachedImage == nil) {
+    //        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
+    //        cachedImage = [UIImage imageWithData:imageData];
+    //        [imageCache setObject:cachedImage forKey:imageUrl];
+    //    }
     
-//    cell.imageView.image = cachedImage;
+    //    cell.imageView.image = cachedImage;
     
     return cell;
 }
