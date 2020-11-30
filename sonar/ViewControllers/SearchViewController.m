@@ -53,7 +53,7 @@ NSCache<NSString*, UIImage*> *imageCache;
     
 }
 
-NSString* SearchResultUrl;
+NSString* searchResultUrl;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
@@ -64,7 +64,7 @@ NSString* SearchResultUrl;
 
     url = [NSString stringWithFormat:@"%@/music", url];
     
-    SearchResultUrl = url;
+    searchResultUrl = url;
     
     [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }
@@ -76,7 +76,7 @@ NSString* SearchResultUrl;
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[SearchResultViewController class]])
     {
-        ((SearchResultViewController *)destinationViewController).SearchResultUrl = SearchResultUrl;
+        ((SearchResultViewController *)destinationViewController).searchResultUrl = searchResultUrl;
     }
 }
 

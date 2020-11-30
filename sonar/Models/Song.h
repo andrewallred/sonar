@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Song : NSObject
 
-@property (nonatomic, strong) NSString* Title;
-@property (nonatomic, strong) NSString* AudioUrl;
+@property (nonatomic, strong) NSString* title;
+@property (nonatomic, strong) NSString* audioUrl;
 
 @end
 

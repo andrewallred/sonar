@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Artist : NSObject
 
-@property (nonatomic, strong) NSMutableArray<Album*>* Albums;
+@property (nonatomic, strong) NSMutableArray<Album*>* albums;
 
 @end
 

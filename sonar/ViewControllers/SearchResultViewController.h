@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITableView *albumsTableView;
 
-@property (nonatomic, strong) NSString* SearchResultUrl;
-@property (strong, atomic) Artist* Artist;
+@property (nonatomic, strong) NSString* searchResultUrl;
+@property (strong, atomic) Artist* artist;
 
 @end
 

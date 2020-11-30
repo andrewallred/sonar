@@ -15,8 +15,8 @@
 @interface AlbumViewController ()
 
 @property (strong, nonatomic) AVPlayer *player;
-@property (strong, nonatomic) Album* Album;
-@property (strong, nonatomic) NSCache<NSString*, UIImage*>* ImageCache;
+@property (strong, nonatomic) Album* album;
+@property (strong, nonatomic) NSCache<NSString*, UIImage*>* imageCache;
 
 @end
 
@@ -26,27 +26,23 @@
     
     [super viewDidLoad];
     
-    self.SongsTableView.delegate = self;
-    self.SongsTableView.dataSource = self;
+    self.songsTableView.delegate = self;
+    self.songsTableView.dataSource = self;
     
-    self.Album = [BandcampService loadAlbum:self.AlbumUrl];
+    self.album = [BandcampService loadAlbum:self.albumUrl];
     
-    [self.SongsTableView reloadData];
+    [self.songsTableView reloadData];
     
 }
-
-
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Song* song = self.Album.Songs[indexPath.row];
+    Song* song = self.album.songs[indexPath.row];
     
-    cell.textLabel.text = song.AudioUrl;
+    cell.textLabel.text = song.audioUrl;
     
 //    NSString* imageUrl = resultItem[@"img"];
 //    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
@@ -64,20 +60,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.Album.Songs count];
+    return [self.album.songs count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
     
-    Song* song = self.Album.Songs[selectedRow];
+    Song* song = self.album.songs[selectedRow];
     
-    [self playAudio:song onAlbum:self.Album];
+    [self playAudio:song onAlbum:self.album];
 }
 
 - (void) playAudio: (Song*) song onAlbum:(Album*) album {
-    NSURL *url = [NSURL URLWithString:song.AudioUrl];
+    NSURL *url = [NSURL URLWithString:song.audioUrl];
     
     AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
@@ -91,13 +87,13 @@
     [self.view addSubview:playerViewController.view];
     playerViewController.view.frame = self.view.frame;
     
-    if (album.ImageUrl != nil) {
+    if (album.imageUrl != nil) {
         
-        UIImage* cachedImage = [self.ImageCache objectForKey:album.ImageUrl];
+        UIImage* cachedImage = [self.imageCache objectForKey:album.imageUrl];
         if (cachedImage == nil) {
-            NSData* imageData = [ServiceCaller loadDataByUrl:album.ImageUrl];
+            NSData* imageData = [ServiceCaller loadDataByUrl:album.imageUrl];
             cachedImage = [UIImage imageWithData:imageData];
-            [self.ImageCache setObject:cachedImage forKey:album.ImageUrl];
+            [self.imageCache setObject:cachedImage forKey:album.imageUrl];
         }
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:cachedImage];

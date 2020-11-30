@@ -54,9 +54,9 @@
             albumUrl = [albumUrl stringByReplacingOccurrencesOfString:@"\">" withString:@""];
             
             Album* album = [[Album alloc] init];
-            album.Url = albumUrl;
+            album.url = albumUrl;
             
-            [artist.Albums addObject:album];
+            [artist.albums addObject:album];
             
         }
         
@@ -83,8 +83,8 @@
         audioUrl = [audioUrl stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
         
         Song* song = [[Song alloc] init];
-        song.AudioUrl = audioUrl;
-        [album.Songs addObject:song];
+        song.audioUrl = audioUrl;
+        [album.songs addObject:song];
     }
     
     NSArray* coverMatches = [RegexHelper regexMatchesForString: page regex:@"<a class=\"popupImage\" href=\"[a-zA-Z0-9_:\\/.-]*"];
