@@ -103,6 +103,12 @@
     }
     
     [self.player play];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
+}
+
+-(void)playerDidFinishPlaying:(NSNotification *) notification {
+    NSLog(@"Song finished");
 }
 
 @end
