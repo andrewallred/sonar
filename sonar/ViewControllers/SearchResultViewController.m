@@ -21,7 +21,7 @@
     self.albumsTableView.delegate = self;
     self.albumsTableView.dataSource = self;
     
-    self.Artist = [BandcampService loadArtist:_searchResultUrl];
+    self.artist = [BandcampService loadArtist:_searchResultUrl];
     
     [self.albumsTableView reloadData];
 }

@@ -34,13 +34,12 @@
 +(Artist*) loadArtist: (NSString*) url {
     
     Artist* artist = [[Artist alloc] init];
-    artist.Albums = [[NSMutableArray<Album*> alloc] init];
+    artist.albums = [[NSMutableArray<Album*> alloc] init];
     
     NSString *page = [ServiceCaller loadStringByUrl:url];
     
     NSArray* albumSectionMatches = [RegexHelper regexMatchesForString: page regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_\\/\"-<> \\t\\n\\r=]*<\\/a>"];
     
-    NSString* albumUrl;
     for (NSString *albumSectionMatch in albumSectionMatches) {
         
         NSArray* albumUrlMatches = [RegexHelper regexMatchesForString: albumSectionMatch regex:@"<a href=\"\\/album\\/[a-zA-Z0-9_-]*\">"];
@@ -68,7 +67,7 @@
 +(Album*) loadAlbum:(NSString*) url {
     
     Album* album = [[Album alloc] init];
-    album.Songs = [[NSMutableArray<Song*> alloc] init];
+    album.songs = [[NSMutableArray<Song*> alloc] init];
     
     //@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"
     NSString *page = [ServiceCaller loadStringByUrl:url];
@@ -90,7 +89,7 @@
     NSArray* coverMatches = [RegexHelper regexMatchesForString: page regex:@"<a class=\"popupImage\" href=\"[a-zA-Z0-9_:\\/.-]*"];
     for (NSString *match in coverMatches) {
         NSString* imageUrl = match;
-        album.ImageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"<a class=\"popupImage\" href=\"" withString:@""];
+        album.imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"<a class=\"popupImage\" href=\"" withString:@""];
         break;
     }
     
