@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Artist.h"
 
 @interface SearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -16,7 +17,8 @@
 
 - (IBAction)searchEditingDidEnd:(id)sender;
 
-@property (strong, atomic) NSMutableSet *searchResults;
+@property (strong, atomic) NSMutableArray<Artist*>* artists;
+
 
 @end
 

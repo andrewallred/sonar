@@ -89,7 +89,6 @@
     if (album.imageUrl != nil) {
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:self.albumImage];
-        
         [playerViewController.contentOverlayView addSubview:imageView];
         
     }

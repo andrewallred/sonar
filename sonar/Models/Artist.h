@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* bandcampUrl;
 @property (nonatomic, strong) NSMutableArray<Album*>* discography;
 
+@property (nonatomic, strong) NSDictionary* dictionary;
+
+-(id) initWithDictionary:(NSDictionary*) dictionary;
+
 @end
 
 NS_ASSUME_NONNULL_END

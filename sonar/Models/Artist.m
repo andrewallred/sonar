@@ -10,4 +10,17 @@
 
 @implementation Artist
 
+-(id) initWithDictionary:(NSDictionary*) dictionary {
+    
+    if ((self = [super init]) != nil) {
+        self.bandId = [dictionary[@"id"] longValue];
+        self.name = dictionary[@"name"];
+        self.imageUrl = dictionary[@"img"];
+        
+        self.dictionary = dictionary;
+    }
+    
+    return self;
+}
+
 @end

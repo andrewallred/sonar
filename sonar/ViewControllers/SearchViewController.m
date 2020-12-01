@@ -12,6 +12,7 @@
 #import "ServiceCaller.h"
 #import "SearchResultViewController.h"
 #import "CachedImageHelper.h"
+#import "LocalDataHelper.h"
 
 @interface SearchViewController ()
 
@@ -26,7 +27,13 @@
     self.searchTableView.delegate = self;
     self.searchTableView.dataSource = self;
     
-    self.searchResults = [[NSMutableSet alloc] init];
+    NSArray<NSDictionary*>* savedSearches = [LocalDataHelper getRecentlySearchedArtists];
+    
+    if (self.artists == nil) {
+        self.artists = [[NSMutableArray<Artist*> alloc] init];
+    }
+    
+    [self.searchTableView reloadData];
     
 }
 
@@ -36,13 +43,15 @@
     
     NSDictionary *searchResults = [BandcampService loadSearchResults:_searchTextField.text];
     
-    [self.searchResults removeAllObjects];
+    [self.artists removeAllObjects];
     
     for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
         
         NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
         if ([searchResult[@"type"] isEqualToString:@"b"]) {
-            [self.searchResults addObject:searchResult];
+            
+            Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"auto"][@"results"][i]];
+            [self.artists addObject:artist];
         }
         
     }
@@ -55,10 +64,9 @@ long bandId;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
+    bandId = self.artists[selectedRow].bandId;
     
-    NSDictionary* o = [self.searchResults allObjects][selectedRow];
-    
-    bandId = [o[@"id"] longValue];
+    [LocalDataHelper addArtistToSearchedArtists:self.artists[selectedRow].dictionary];
 
     [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }
@@ -79,12 +87,11 @@ long bandId;
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary* resultItem = [self.searchResults allObjects][indexPath.row];
+    Artist* artist = self.artists[indexPath.row];
     
-    cell.textLabel.text = resultItem[@"name"];
+    cell.textLabel.text = artist.name;
     
-    NSString* imageUrl = resultItem[@"img"];
-    cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];
+    cell.imageView.image = [CachedImageHelper getImageForUrl:artist.imageUrl];
     
     return cell;
 }
@@ -92,7 +99,7 @@ long bandId;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.searchResults count];
+    return [self.artists count];
 }
 
 
