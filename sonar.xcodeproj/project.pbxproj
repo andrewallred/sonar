@@ -19,7 +19,7 @@
 		854594DC25736A0A00E96F97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594DB25736A0A00E96F97 /* main.m */; };
 		854594E625736A0A00E96F97 /* sonarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594E525736A0A00E96F97 /* sonarTests.m */; };
 		854594F125736A0A00E96F97 /* sonarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594F025736A0A00E96F97 /* sonarUITests.m */; };
-		85459500257378EB00E96F97 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594FF257378EB00E96F97 /* SearchResultViewController.m */; };
+		85459500257378EB00E96F97 /* ArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594FF257378EB00E96F97 /* ArtistViewController.m */; };
 		8545950325737DFD00E96F97 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8545950225737DFD00E96F97 /* AVFoundation.framework */; };
 		8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950525739B9F00E96F97 /* ServiceCaller.m */; };
 		8545950925739D3200E96F97 /* RegexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950825739D3200E96F97 /* RegexHelper.m */; };
@@ -74,8 +74,8 @@
 		854594EC25736A0A00E96F97 /* sonarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sonarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		854594F025736A0A00E96F97 /* sonarUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sonarUITests.m; sourceTree = "<group>"; };
 		854594F225736A0A00E96F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		854594FE257378EB00E96F97 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
-		854594FF257378EB00E96F97 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
+		854594FE257378EB00E96F97 /* ArtistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistViewController.h; sourceTree = "<group>"; };
+		854594FF257378EB00E96F97 /* ArtistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistViewController.m; sourceTree = "<group>"; };
 		8545950225737DFD00E96F97 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8545950425739B9F00E96F97 /* ServiceCaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceCaller.h; sourceTree = "<group>"; };
 		8545950525739B9F00E96F97 /* ServiceCaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceCaller.m; sourceTree = "<group>"; };
@@ -220,8 +220,8 @@
 			children = (
 				854594CF25736A0700E96F97 /* SearchViewController.h */,
 				854594D025736A0700E96F97 /* SearchViewController.m */,
-				854594FE257378EB00E96F97 /* SearchResultViewController.h */,
-				854594FF257378EB00E96F97 /* SearchResultViewController.m */,
+				854594FE257378EB00E96F97 /* ArtistViewController.h */,
+				854594FF257378EB00E96F97 /* ArtistViewController.m */,
 				850B747425748E77000B9D17 /* AlbumViewController.h */,
 				850B747525748E77000B9D17 /* AlbumViewController.m */,
 				85CA9A172576053000BDDA1E /* TrackViewController.h */,
@@ -380,7 +380,7 @@
 				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
 				850A55372575ABA7009FB93C /* BandcampMobileService.m in Sources */,
 				85CA9A192576053000BDDA1E /* TrackViewController.m in Sources */,
-				85459500257378EB00E96F97 /* SearchResultViewController.m in Sources */,
+				85459500257378EB00E96F97 /* ArtistViewController.m in Sources */,
 				854595152574137400E96F97 /* Artist.m in Sources */,
 				850B747325745C7E000B9D17 /* Track.m in Sources */,
 				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,

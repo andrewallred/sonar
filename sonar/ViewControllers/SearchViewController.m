@@ -10,7 +10,7 @@
 #import "RegexHelper.h"
 #import "BandcampService.h"
 #import "ServiceCaller.h"
-#import "SearchResultViewController.h"
+#import "ArtistViewController.h"
 #import "CachedImageHelper.h"
 #import "LocalDataHelper.h"
 
@@ -82,9 +82,9 @@ long bandId;
     [super prepareForSegue:segue sender:sender];
     
     UIViewController *destinationViewController = segue.destinationViewController;
-    if ([destinationViewController isKindOfClass:[SearchResultViewController class]])
+    if ([destinationViewController isKindOfClass:[ArtistViewController class]])
     {
-        ((SearchResultViewController *)destinationViewController).bandId = bandId;
+        ((ArtistViewController *)destinationViewController).bandId = bandId;
     }
 }
 

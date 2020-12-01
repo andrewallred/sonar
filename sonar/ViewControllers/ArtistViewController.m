@@ -1,23 +1,23 @@
 //
-//  SearchResultViewController.m
+//  ArtistViewController.m
 //  sonar
 //
 //  Created by Allred, Andrew on 11/29/20.
 //  Copyright © 2020 Allred, Andrew. All rights reserved.
 //
 
-#import "SearchResultViewController.h"
+#import "ArtistViewController.h"
 #import "AlbumViewController.h"
 #import "CachedImageHelper.h"
 #import "BandcampMobileService.h"
 
-@interface SearchResultViewController ()
+@interface ArtistViewController ()
 
 @property (strong, nonatomic) UIImage* artistImage;
 
 @end
 
-@implementation SearchResultViewController
+@implementation ArtistViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -1,5 +1,5 @@
 //
-//  SearchResultController.h
+//  ArtistViewController.h
 //  sonar
 //
 //  Created by Allred, Andrew on 11/29/20.
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchResultViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ArtistViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *albumsTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *artistImageView;

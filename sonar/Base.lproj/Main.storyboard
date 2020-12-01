@@ -63,10 +63,10 @@
             </objects>
             <point key="canvasLocation" x="-1092" y="118"/>
         </scene>
-        <!--Search Result View Controller-->
+        <!--Artist View Controller-->
         <scene sceneID="muz-5c-a8d">
             <objects>
-                <viewController id="cgZ-iB-500" customClass="SearchResultViewController" sceneMemberID="viewController">
+                <viewController id="cgZ-iB-500" customClass="ArtistViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9M9-fk-ZvV"/>
                         <viewControllerLayoutGuide type="bottom" id="Xyb-Ws-Tde"/>
