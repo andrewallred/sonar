@@ -17,8 +17,6 @@
     
     NSDictionary* details = [ServiceCaller postToService:@"https://bandcamp.com/api/mobile/22/band_details" withData:postData];
     
-    NSString* s = [details description];
-    
     return [self dictionaryToArtist:details];
     
 }
@@ -55,8 +53,6 @@
     NSString* url = [NSString stringWithFormat: @"https://bandcamp.com/api/mobile/22/tralbum_details?band_id=%ld&tralbum_id=%ld&tralbum_type=a", bandId, albumId];
     
     NSDictionary* details = [ServiceCaller loadJsonByUrl:url withTimeoutInterval:120];
-    
-    NSString* s = [details description];
     
     return [self dictionaryToAlbum:details];
     
