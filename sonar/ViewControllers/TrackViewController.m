@@ -9,6 +9,7 @@
 #import "TrackViewController.h"
 #include <AVFoundation/AVFoundation.h>
 #include <AVKit/AVKit.h>
+#import "CachedImageHelper.h"
 
 @interface TrackViewController ()
 
@@ -50,7 +51,9 @@
     
     if (album.imageUrl != nil) {
         
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.albumImage];
+        NSString* imageUrl = self.album.imageUrl;
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[CachedImageHelper getImageForUrl:imageUrl]];
         [playerViewController.contentOverlayView addSubview:imageView];
         
     }
