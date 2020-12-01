@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) UIImage* albumImage;
+@property (weak, nonatomic) Track* currentTrack;
 
 @end
 
@@ -72,6 +73,9 @@
 }
 
 - (void) playAudio: (Track*) track onAlbum:(Album*) album {
+    
+    self.currentTrack = track;
+    
     NSURL *url = [NSURL URLWithString:track.streamingUrl];
     
     AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
@@ -100,6 +104,10 @@
 
 -(void)playerDidFinishPlaying:(NSNotification *) notification {
     NSLog(@"Track finished");
+    
+    if (self.currentTrack.number + 1 < [self.album.tracks count]) {
+        [self playAudio:self.album.tracks[self.currentTrack.number + 1] onAlbum:self.album];
+    }
 }
 
 @end

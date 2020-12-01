@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* streamingUrl;
+@property (nonatomic) int number;
 
 @end
 

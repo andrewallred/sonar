@@ -75,6 +75,7 @@
         // TODO should fix this
         track.streamingUrl = dictionary[@"tracks"][i][@"streaming_url"][@"mp3-128"];
         track.title = dictionary[@"tracks"][i][@"title"];
+        track.number = i;
         
         [album.tracks addObject:track];
     }
