@@ -9,6 +9,7 @@
 #import "SearchResultViewController.h"
 #import "AlbumViewController.h"
 #import "CachedImageHelper.h"
+#import "BandcampMobileService.h"
 
 @interface SearchResultViewController ()
 
@@ -22,7 +23,7 @@
     self.albumsTableView.delegate = self;
     self.albumsTableView.dataSource = self;
     
-    self.artist = [BandcampService loadArtist:_searchResultUrl];
+    self.artist = [BandcampMobileService loadBandDetails:self.bandId];
     
     [self.albumsTableView reloadData];
 }
@@ -32,12 +33,12 @@
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Album* album = self.artist.albums[indexPath.row];
+    Album* album = self.artist.discography[indexPath.row];
     
-    cell.textLabel.text = album.name;
+    cell.textLabel.text = album.title;
     
-    NSString* imageUrl = album.imageUrl;
-    cell.imageView.image = cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];;
+    // TODO NSString* imageUrl = album.imageUrl;
+    // cell.imageView.image = cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];;
     
     return cell;
 }
@@ -45,16 +46,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.artist.albums count];
+    return [self.artist.discography count];
 }
 
-NSString* albumUrl;
+Album* selectedAlbum;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
     
-    Album* album = self.artist.albums[selectedRow];
-    albumUrl = album.url;
+    selectedAlbum = self.artist.discography[selectedRow];
     
     [self performSegueWithIdentifier:@"AlbumSegue" sender:self];
 }
@@ -66,7 +66,7 @@ NSString* albumUrl;
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[AlbumViewController class]])
     {
-        ((AlbumViewController *)destinationViewController).albumUrl = albumUrl;
+        ((AlbumViewController *)destinationViewController).album = selectedAlbum;
     }
 }
 

@@ -8,14 +8,15 @@
 
 #import "AlbumViewController.h"
 #import "BandcampService.h"
+#import "BandcampMobileService.h"
 #include <AVFoundation/AVFoundation.h>
 #include <AVKit/AVKit.h>
 #import "ServiceCaller.h"
+#import "Album.h"
 
 @interface AlbumViewController ()
 
 @property (strong, nonatomic) AVPlayer *player;
-@property (strong, nonatomic) Album* album;
 @property (strong, nonatomic) NSCache<NSString*, UIImage*>* imageCache;
 
 @end
@@ -29,7 +30,7 @@
     self.songsTableView.delegate = self;
     self.songsTableView.dataSource = self;
     
-    self.album = [BandcampService loadAlbum:self.albumUrl];
+    self.album = [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId];
     
     [self.songsTableView reloadData];
     
@@ -40,9 +41,9 @@
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Song* song = self.album.songs[indexPath.row];
+    Track* track = self.album.tracks[indexPath.row];
     
-    cell.textLabel.text = song.audioUrl;
+    cell.textLabel.text = track.title;
     
     //    NSString* imageUrl = resultItem[@"img"];
     //    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
@@ -60,20 +61,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.album.songs count];
+    return [self.album.tracks count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
     
-    Song* song = self.album.songs[selectedRow];
+    Track* track = self.album.tracks[selectedRow];
     
-    [self playAudio:song onAlbum:self.album];
+    [self playAudio:track onAlbum:self.album];
 }
 
-- (void) playAudio: (Song*) song onAlbum:(Album*) album {
-    NSURL *url = [NSURL URLWithString:song.audioUrl];
+- (void) playAudio: (Track*) track onAlbum:(Album*) album {
+    NSURL *url = [NSURL URLWithString:track.streamingUrl];
     
     AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
@@ -108,7 +109,7 @@
 }
 
 -(void)playerDidFinishPlaying:(NSNotification *) notification {
-    NSLog(@"Song finished");
+    NSLog(@"Track finished");
 }
 
 @end

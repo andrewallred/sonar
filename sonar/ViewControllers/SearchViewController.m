@@ -51,19 +51,15 @@
     
 }
 
-NSString* searchResultUrl;
+long bandId;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
     
     NSDictionary* o = [self.searchResults allObjects][selectedRow];
     
-    NSString* url = o[@"url"];
+    bandId = [o[@"id"] longValue];
 
-    url = [NSString stringWithFormat:@"%@/music", url];
-    
-    searchResultUrl = url;
-    
     [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }
 
@@ -74,7 +70,7 @@ NSString* searchResultUrl;
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[SearchResultViewController class]])
     {
-        ((SearchResultViewController *)destinationViewController).searchResultUrl = searchResultUrl;
+        ((SearchResultViewController *)destinationViewController).bandId = bandId;
     }
 }
 

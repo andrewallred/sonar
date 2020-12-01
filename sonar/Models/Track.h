@@ -1,5 +1,5 @@
 //
-//  Song.h
+//  Track.h
 //  sonar
 //
 //  Created by Allred, Andrew on 11/29/20.
@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Song : NSObject
+@interface Track : NSObject
 
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic, strong) NSString* audioUrl;
+@property (nonatomic, strong) NSString* streamingUrl;
 
 @end
 

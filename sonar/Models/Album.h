@@ -7,16 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Song.h"
+#import "Track.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Album : NSObject
 
+@property (nonatomic) long itemId;
+
+// 361178786
+// https://f4.bcbits.com/img/a0361178786_16.jpg
+@property (nonatomic) long artId;
+@property (nonatomic) long bandId;
 @property (nonatomic, strong) NSString* imageUrl;
-@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* url;
-@property (nonatomic, strong) NSMutableArray<Song*>* songs;
+@property (nonatomic, strong) NSString* releaseDate;
+@property (nonatomic, strong) NSMutableArray<Track*>* tracks;
 
 @end
 

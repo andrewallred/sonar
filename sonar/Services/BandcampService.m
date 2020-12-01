@@ -34,7 +34,7 @@
 +(Artist*) loadArtist: (NSString*) url {
     
     Artist* artist = [[Artist alloc] init];
-    artist.albums = [[NSMutableArray<Album*> alloc] init];
+    artist.discography = [[NSMutableArray<Album*> alloc] init];
     
     NSString *page = [ServiceCaller loadStringByUrl:url];
     
@@ -69,7 +69,7 @@
             albumImageUrl = [albumImageUrl stringByReplacingOccurrencesOfString:@"<img src=\"" withString:@""];
             albumImageUrl = [albumImageUrl stringByReplacingOccurrencesOfString:@"\" alt=\"\" \/>" withString:@""];
             
-            album.imageUrl = albumImageUrl;
+            // TODO album.imageUrl = albumImageUrl;
             
         }
         
@@ -84,11 +84,11 @@
             albumName = [albumName stringByReplacingOccurrencesOfString:@"<p class=\"title\">" withString:@""];
             albumName = [albumName stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
             
-            album.name = [albumName stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            album.title = [albumName stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
             
         }
         
-        [artist.albums addObject:album];
+        [artist.discography addObject:album];
         
     }
     
@@ -98,7 +98,7 @@
 +(Album*) loadAlbum:(NSString*) url {
     
     Album* album = [[Album alloc] init];
-    album.songs = [[NSMutableArray<Song*> alloc] init];
+    album.tracks = [[NSMutableArray<Track*> alloc] init];
     
     //@"https://lazymagnet.bandcamp.com/album/make-it-fun-again-2020"
     NSString *page = [ServiceCaller loadStringByUrl:url];
@@ -112,15 +112,15 @@
         audioUrl = [audioUrl stringByReplacingOccurrencesOfString:@"&quot;" withString:@""];
         audioUrl = [audioUrl stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
         
-        Song* song = [[Song alloc] init];
-        song.audioUrl = audioUrl;
-        [album.songs addObject:song];
+        Track* track = [[Track alloc] init];
+        track.streamingUrl = audioUrl;
+        [album.tracks addObject:track];
     }
     
     NSArray* coverMatches = [RegexHelper regexMatchesForString: page regex:@"<a class=\"popupImage\" href=\"[a-zA-Z0-9_:\\/.-]*"];
     for (NSString *match in coverMatches) {
         NSString* imageUrl = match;
-        album.imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"<a class=\"popupImage\" href=\"" withString:@""];
+        // TODO album.imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"<a class=\"popupImage\" href=\"" withString:@""];
         break;
     }
     

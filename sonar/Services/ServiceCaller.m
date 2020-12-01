@@ -90,4 +90,51 @@
     return (__bridge_transfer NSString *)safeString; //[NSString stringWithFormat:@"%@", safeString];
 }
 
++(NSDictionary *) postToService:(NSString *) urlString withData:(NSString *) postData {
+    return [ServiceCaller postToService:urlString withData:postData withTimeoutInterval:120];
+}
+
++(NSDictionary *) postToService:(NSString *) urlString withData:(NSString *) postData withTimeoutInterval:(NSTimeInterval)timeout
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
+    [request setHTTPMethod: @"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //NSData *requestData = [NSData dataWithBytes:[postData UTF8String] length:[postData length]];
+    NSData *requestData = [postData dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody: requestData];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response
+                                                     error:&error];
+    
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+        return nil;
+    }
+    
+    if (data == nil)
+    {
+        return nil;
+    }
+
+    NSLog(@"Data\n%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    
+    NSDictionary *objects = [NSJSONSerialization
+                             JSONObjectWithData:data
+                             options:NSJSONReadingMutableLeaves
+                             error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+        return nil;
+    }
+    return objects;
+}
+
 @end

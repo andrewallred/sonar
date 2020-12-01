@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		850B747325745C7E000B9D17 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747225745C7E000B9D17 /* Song.m */; };
+		850A55372575ABA7009FB93C /* BandcampMobileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 850A55362575ABA7009FB93C /* BandcampMobileService.m */; };
+		850B747325745C7E000B9D17 /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747225745C7E000B9D17 /* Track.m */; };
 		850B747625748E77000B9D17 /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 850B747525748E77000B9D17 /* AlbumViewController.m */; };
 		852BC6CE2574B5F400288B9A /* CachedImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 852BC6CD2574B5F400288B9A /* CachedImageHelper.m */; };
 		854594CE25736A0700E96F97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594CD25736A0700E96F97 /* AppDelegate.m */; };
@@ -47,8 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		850B747125745C7E000B9D17 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
-		850B747225745C7E000B9D17 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		850A55352575ABA7009FB93C /* BandcampMobileService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandcampMobileService.h; sourceTree = "<group>"; };
+		850A55362575ABA7009FB93C /* BandcampMobileService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandcampMobileService.m; sourceTree = "<group>"; };
+		850B747125745C7E000B9D17 /* Track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
+		850B747225745C7E000B9D17 /* Track.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
 		850B747425748E77000B9D17 /* AlbumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
 		850B747525748E77000B9D17 /* AlbumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		852BC6CC2574B5F400288B9A /* CachedImageHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CachedImageHelper.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				8545950525739B9F00E96F97 /* ServiceCaller.m */,
 				8545950C25740E0200E96F97 /* BandcampService.h */,
 				8545950D25740E0200E96F97 /* BandcampService.m */,
+				850A55352575ABA7009FB93C /* BandcampMobileService.h */,
+				850A55362575ABA7009FB93C /* BandcampMobileService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -224,8 +229,8 @@
 				85459517257413CE00E96F97 /* Album.m */,
 				854595192574143300E96F97 /* SearchResult.h */,
 				8545951A2574143300E96F97 /* SearchResult.m */,
-				850B747125745C7E000B9D17 /* Song.h */,
-				850B747225745C7E000B9D17 /* Song.m */,
+				850B747125745C7E000B9D17 /* Track.h */,
+				850B747225745C7E000B9D17 /* Track.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -363,9 +368,10 @@
 				8545951B2574143300E96F97 /* SearchResult.m in Sources */,
 				8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */,
 				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
+				850A55372575ABA7009FB93C /* BandcampMobileService.m in Sources */,
 				85459500257378EB00E96F97 /* SearchResultViewController.m in Sources */,
 				854595152574137400E96F97 /* Artist.m in Sources */,
-				850B747325745C7E000B9D17 /* Song.m in Sources */,
+				850B747325745C7E000B9D17 /* Track.m in Sources */,
 				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,
 				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
 				852BC6CE2574B5F400288B9A /* CachedImageHelper.m in Sources */,

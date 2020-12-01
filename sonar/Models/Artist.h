@@ -13,7 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Artist : NSObject
 
-@property (nonatomic, strong) NSMutableArray<Album*>* albums;
+@property (nonatomic) long bandId;
+@property (nonatomic) long bioImageId;
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* location;
+@property (nonatomic, strong) NSString* biography;
+@property (nonatomic, strong) NSString* bandcampUrl;
+@property (nonatomic, strong) NSMutableArray<Album*>* discography;
 
 @end
 

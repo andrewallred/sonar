@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITableView *songsTableView;
 
-@property (nonatomic, strong) NSString* albumUrl;
+@property (nonatomic, strong) Album* album;
 
-@property (strong, atomic) NSMutableArray<Song*>* songs;
+@property (strong, atomic) NSMutableArray<Track*>* Track;
 
 @end
 

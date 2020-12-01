@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BandcampService : NSObject
 
 +(NSDictionary*) loadSearchResults:(NSString *)urlString;
-+(Artist*) loadArtist: (NSString*) url;
-+(Album*) loadAlbum: (NSString*) url;
 
 @end
 

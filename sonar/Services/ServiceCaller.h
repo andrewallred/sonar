@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSData*) loadDataByUrl:(NSString *)urlString Accept:(NSString*)accept;
 +(NSData*) loadDataByUrl:(NSString *)urlString Accept:(NSString*)accept withTimeoutInterval:(NSTimeInterval)timeout;
 
++(NSDictionary *) postToService:(NSString *) urlString withData:(NSString *) postData;
++(NSDictionary *) postToService:(NSString *) urlString withData:(NSString *) postData withTimeoutInterval:(NSTimeInterval)timeout;
+
 +(NSString *) encodeParameter: (NSString *)unencodedString;
 
 @end
