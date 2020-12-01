@@ -31,6 +31,7 @@
     
     self.songsTableView.delegate = self;
     self.songsTableView.dataSource = self;
+    self.songsTableView.backgroundColor = [UIColor clearColor];
     
     self.album = [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId];
     

@@ -26,6 +26,7 @@
     
     self.searchTableView.delegate = self;
     self.searchTableView.dataSource = self;
+    self.searchTableView.backgroundColor = [UIColor clearColor];
     
     NSArray<NSDictionary*>* savedSearches = [LocalDataHelper getRecentlySearchedArtists];
     
