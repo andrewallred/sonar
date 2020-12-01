@@ -20,8 +20,6 @@
     
     self.audioSession = [AVAudioSession sharedInstance];
     
-    //try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
-    
     [self.audioSession setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionCategoryPlayback options:nil error:nil];
 
     
