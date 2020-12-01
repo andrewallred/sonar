@@ -6,7 +6,7 @@ Currently learning to crawl.
 
 ## Why make this app?
 
-Simple, I wanted to listen to my favorite Bandcamp artists on my AppleTV!
+Simple, I wanted to listen to my favorite Bandcamp artists on my AppleTV.
 
 ## Why Objective C?
 
