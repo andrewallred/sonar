@@ -35,10 +35,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-search" translatesAutoresizingMaskIntoConstraints="NO" id="BVe-Re-mkl">
-                                <rect key="frame" x="74" y="99" width="148" height="112"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search" textAlignment="natural" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="wsP-60-iHH">
                                 <rect key="frame" x="252" y="99" width="736" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,7 +45,7 @@
                                 </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bandcamp-button-square-black" translatesAutoresizingMaskIntoConstraints="NO" id="FZx-e3-tcH">
-                                <rect key="frame" x="1676" y="99" width="148" height="112"/>
+                                <rect key="frame" x="78" y="99" width="148" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -212,6 +208,5 @@
     </scenes>
     <resources>
         <image name="bandcamp-button-square-black" width="128" height="128"/>
-        <image name="icons8-search" width="500" height="500"/>
     </resources>
 </document>
