@@ -6,6 +6,8 @@
 //  Copyright © 2020 Allred, Andrew. All rights reserved.
 //
 
+// TODO this class is using tools deprecated in tvOS 9 and should be modernized (see warnings)
+
 #import "ServiceCaller.h"
 
 @implementation ServiceCaller
