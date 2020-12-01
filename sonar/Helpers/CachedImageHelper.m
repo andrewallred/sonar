@@ -23,7 +23,9 @@ NSCache<NSString*, UIImage*>* imageCache;
     if (cachedImage == nil) {
         NSData* imageData = [ServiceCaller loadDataByUrl:url];
         cachedImage = [UIImage imageWithData:imageData];
-        [imageCache setObject:cachedImage forKey:url];
+        if (cachedImage != nil) {
+            [imageCache setObject:cachedImage forKey:url];
+        }
     }
     
     return cachedImage;
