@@ -71,7 +71,7 @@ long bandId;
     NSInteger selectedRow = [indexPath row];
     bandId = self.artists[selectedRow].bandId;
     
-    [LocalDataHelper addArtistToSearchedArtists:self.artists[selectedRow].dictionary];
+    [LocalDataHelper addArtistToSearchedArtists:self.artists[selectedRow]];
 
     [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LocalDataHelper : NSObject
 
 +(NSMutableArray<NSDictionary*>*) getRecentlySearchedArtists;
-+(void) addArtistToSearchedArtists:(NSDictionary*) artist;
++(void) addArtistToSearchedArtists:(Artist*) artist;
 
 @end
 

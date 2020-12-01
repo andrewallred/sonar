@@ -21,19 +21,32 @@
     
 }
 
-+(void) addArtistToSearchedArtists:(NSDictionary*) artist {
++(void) addArtistToSearchedArtists:(Artist*) artist {
     
     NSMutableArray<NSDictionary*>* searchedArtists = [self getRecentlySearchedArtists];
     if (searchedArtists == nil) {
         searchedArtists = [[NSMutableArray<NSDictionary*> alloc] init];
     }
     
-    [searchedArtists addObject:artist];
+    bool foundArtist = NO;
+    for (int i = 0; i < [searchedArtists count]; i++) {
+        Artist* savedArtist = [[Artist alloc] initWithDictionary:searchedArtists[i]];
+        if (savedArtist.bandId == artist.bandId) {
+            foundArtist = YES;
+            break;;
+        }
+    }
     
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:searchedArtists requiringSecureCoding:NO error:nil];
+    if (!foundArtist) {
+        
+        [searchedArtists addObject:artist.dictionary];
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:searchedArtists requiringSecureCoding:NO error:nil];
 
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"searchedArtists"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"searchedArtists"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
     
 }
 
