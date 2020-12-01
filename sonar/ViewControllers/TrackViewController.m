@@ -78,7 +78,7 @@
 //    albumMetadataItem.key = AVMetadataCommonKeyAlbumName;
 //    albumMetadataItem.keySpace = AVMetadataKeySpaceCommon;
 //    albumMetadataItem.value = album.title;
-//    
+//
 //    AVMutableMetadataItem *artistMetadataItem = [[AVMutableMetadataItem alloc] init];
 //    artistMetadataItem.locale = [NSLocale currentLocale];
 //    artistMetadataItem.key = AVMetadataCommonKeyArtist;
@@ -91,7 +91,7 @@
     descriptionMetadataItem.keySpace = AVMetadataKeySpaceCommon;
     descriptionMetadataItem.value = [NSString stringWithFormat:@"%@, %@ off of %@", album.bandName, track.title, album.title];
     
-    NSArray *metadataArray = [[NSArray alloc] initWithObjects:albumMetadataItem,artistMetadataItem,descriptionMetadataItem, nil];
+    NSArray *metadataArray = [[NSArray alloc] initWithObjects:descriptionMetadataItem, nil];
     
     playerItem.externalMetadata = metadataArray;
     
