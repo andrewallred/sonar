@@ -33,6 +33,11 @@
         self.artists = [[NSMutableArray<Artist*> alloc] init];
     }
     
+    for (int i = 0; i < [savedSearches count]; i++) {
+        Artist* artist = [[Artist alloc] initWithDictionary:savedSearches[i]];
+        [self.artists addObject:artist];
+    }
+    
     [self.searchTableView reloadData];
     
 }

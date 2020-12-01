@@ -13,7 +13,9 @@
 +(NSMutableArray<NSDictionary*>*) getRecentlySearchedArtists {
     
     NSData* data = [[NSUserDefaults standardUserDefaults] dataForKey:@"searchedArtists"];
-    NSMutableArray<NSDictionary*>* searchedArtists = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSMutableArray<NSDictionary*> class] fromData:data error:nil];
+    //NSMutableArray<NSDictionary*>* searchedArtists = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSMutableArray<NSDictionary*> class] fromData:data error:nil];
+    
+    NSMutableArray<NSDictionary*>* searchedArtists = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     return searchedArtists;
     
