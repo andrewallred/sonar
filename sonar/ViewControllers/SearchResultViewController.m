@@ -37,8 +37,8 @@
     
     cell.textLabel.text = album.title;
     
-    // TODO NSString* imageUrl = album.imageUrl;
-    // cell.imageView.image = cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];;
+    NSString* imageUrl = album.imageUrl;
+    cell.imageView.image = cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];;
     
     return cell;
 }
