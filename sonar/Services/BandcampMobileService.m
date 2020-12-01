@@ -23,7 +23,6 @@
     
 }
 
-NSString* artUrl = @"https://f4.bcbits.com/img/a0%ld_16.jpg";
 +(Artist*) dictionaryToArtist:(NSDictionary *) dictionary {
     
     Artist* artist = [[Artist alloc] init];
@@ -39,7 +38,7 @@ NSString* artUrl = @"https://f4.bcbits.com/img/a0%ld_16.jpg";
     for (int i = 0; i < [dictionary[@"discography"] count]; i++) {
         Album* album = [[Album alloc] init];
         album.artId = [dictionary[@"discography"][i][@"art_id"] longValue];
-        album.imageUrl = [NSString stringWithFormat:artUrl, album.artId];
+        album.imageUrl = [NSString stringWithFormat:@"https://f4.bcbits.com/img/a0%ld_8.jpg", album.artId];
         album.bandId = [dictionary[@"discography"][i][@"band_id"] longValue];
         album.itemId = [dictionary[@"discography"][i][@"item_id"] longValue];
         album.releaseDate = dictionary[@"discography"][i][@"release_date"];
@@ -68,7 +67,7 @@ NSString* artUrl = @"https://f4.bcbits.com/img/a0%ld_16.jpg";
     Album* album = [[Album alloc] init];
     
     album.artId = [dictionary[@"art_id"] longValue];
-    album.imageUrl = [NSString stringWithFormat:artUrl, album.artId];
+    album.imageUrl = [NSString stringWithFormat:@"https://f4.bcbits.com/img/a0%ld_16.jpg", album.artId];
     album.title = dictionary[@"album_title"];
     album.itemId = [dictionary[@"id"] longValue];
     
