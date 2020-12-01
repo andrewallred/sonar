@@ -179,11 +179,31 @@
                         <outlet property="artistLabel" destination="iRq-p6-SCK" id="GZN-P0-Fmi"/>
                         <outlet property="releasedLabel" destination="sUx-ys-ypU" id="FBk-jK-2zt"/>
                         <outlet property="songsTableView" destination="fMv-dQ-05o" id="Q88-hO-05q"/>
+                        <segue destination="pCG-eB-W6H" kind="show" identifier="TrackSegue" id="EOZ-9K-7Sy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2B-zO-r2V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1858" y="2050"/>
+        </scene>
+        <!--Track View Controller-->
+        <scene sceneID="GBy-Q3-Ujv">
+            <objects>
+                <viewController id="pCG-eB-W6H" customClass="TrackViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yrB-Xu-TFR"/>
+                        <viewControllerLayoutGuide type="bottom" id="xyr-PL-GYi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YGO-TJ-URZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="59J-FF-ldH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="O7j-j5-vNF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kc8-qt-sM4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4503" y="2050"/>
         </scene>
     </scenes>
     <resources>

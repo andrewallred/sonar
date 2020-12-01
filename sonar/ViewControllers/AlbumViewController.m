@@ -9,17 +9,15 @@
 #import "AlbumViewController.h"
 #import "BandcampService.h"
 #import "BandcampMobileService.h"
-#include <AVFoundation/AVFoundation.h>
-#include <AVKit/AVKit.h>
 #import "ServiceCaller.h"
 #import "Album.h"
 #import "CachedImageHelper.h"
+#import "TrackViewController.h"
 
 @interface AlbumViewController ()
 
-@property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) UIImage* albumImage;
-@property (weak, nonatomic) Track* currentTrack;
+@property (weak, nonatomic) Track* selectedTrack;
 
 @end
 
@@ -68,46 +66,22 @@
     
     NSInteger selectedRow = [indexPath row];
     
-    Track* track = self.album.tracks[selectedRow];
+    self.selectedTrack = self.album.tracks[selectedRow];
     
-    [self playAudio:track onAlbum:self.album];
+    // TODO
+    [self performSegueWithIdentifier:@"TrackSegue" sender:self];
+    
 }
 
-- (void) playAudio: (Track*) track onAlbum:(Album*) album {
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [super prepareForSegue:segue sender:sender];
     
-    self.currentTrack = track;
-    
-    NSURL *url = [NSURL URLWithString:track.streamingUrl];
-    
-    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
-    self.player = [AVPlayer playerWithPlayerItem:playerItem];
-    
-    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
-    playerViewController.player = self.player;
-    
-    // show the view controller
-    [self addChildViewController:playerViewController];
-    [self.view addSubview:playerViewController.view];
-    playerViewController.view.frame = self.view.frame;
-    
-    if (album.imageUrl != nil) {
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.albumImage];
-        [playerViewController.contentOverlayView addSubview:imageView];
-        
-    }
-    
-    [self.player play];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
-}
-
--(void)playerDidFinishPlaying:(NSNotification *) notification {
-    NSLog(@"Track finished");
-    
-    if (self.currentTrack.number + 1 < [self.album.tracks count]) {
-        [self playAudio:self.album.tracks[self.currentTrack.number + 1] onAlbum:self.album];
+    UIViewController *destinationViewController = segue.destinationViewController;
+    if ([destinationViewController isKindOfClass:[TrackViewController class]])
+    {
+        ((TrackViewController *)destinationViewController).album = self.album;
+        ((TrackViewController *)destinationViewController).currentTrack = self.selectedTrack;
     }
 }
 
