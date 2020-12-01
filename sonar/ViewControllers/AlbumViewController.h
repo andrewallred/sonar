@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AlbumViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *songsTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
+@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
+@property (weak, nonatomic) IBOutlet UILabel *albumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *releasedLabel;
 
 @property (nonatomic, strong) Album* album;
 

@@ -13,11 +13,12 @@
 #include <AVKit/AVKit.h>
 #import "ServiceCaller.h"
 #import "Album.h"
+#import "CachedImageHelper.h"
 
 @interface AlbumViewController ()
 
 @property (strong, nonatomic) AVPlayer *player;
-@property (strong, nonatomic) NSCache<NSString*, UIImage*>* imageCache;
+@property (strong, nonatomic) UIImage* albumImage;
 
 @end
 
@@ -32,6 +33,13 @@
     
     self.album = [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId];
     
+    self.artistLabel.text = self.album.bandName;
+    self.albumLabel.text = self.album.title;
+    self.releasedLabel.text = self.album.releaseDate;
+    
+    self.albumImage = [CachedImageHelper getImageForUrl:self.album.imageUrl];
+    self.albumImageView.image = self.albumImage;
+    
     [self.songsTableView reloadData];
     
 }
@@ -44,16 +52,6 @@
     Track* track = self.album.tracks[indexPath.row];
     
     cell.textLabel.text = track.title;
-    
-    //    NSString* imageUrl = resultItem[@"img"];
-    //    UIImage* cachedImage = [imageCache objectForKey:imageUrl];
-    //    if (cachedImage == nil) {
-    //        NSData* imageData = [ServiceCaller loadDataByUrl:imageUrl];
-    //        cachedImage = [UIImage imageWithData:imageData];
-    //        [imageCache setObject:cachedImage forKey:imageUrl];
-    //    }
-    
-    //    cell.imageView.image = cachedImage;
     
     return cell;
 }
@@ -90,14 +88,7 @@
     
     if (album.imageUrl != nil) {
         
-        UIImage* cachedImage = [self.imageCache objectForKey:album.imageUrl];
-        if (cachedImage == nil) {
-            NSData* imageData = [ServiceCaller loadDataByUrl:album.imageUrl];
-            cachedImage = [UIImage imageWithData:imageData];
-            [self.imageCache setObject:cachedImage forKey:album.imageUrl];
-        }
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:cachedImage];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.albumImage];
         
         [playerViewController.contentOverlayView addSubview:imageView];
         

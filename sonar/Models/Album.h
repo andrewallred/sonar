@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 // https://f4.bcbits.com/img/a0361178786_16.jpg
 @property (nonatomic) long artId;
 @property (nonatomic) long bandId;
+@property (nonatomic, strong) NSString* bandName;
 @property (nonatomic, strong) NSString* imageUrl;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* url;

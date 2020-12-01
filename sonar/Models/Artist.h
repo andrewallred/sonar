@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) long bandId;
 @property (nonatomic) long bioImageId;
+@property (nonatomic, strong) NSString* imageUrl;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* location;
 @property (nonatomic, strong) NSString* biography;

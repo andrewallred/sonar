@@ -13,6 +13,8 @@
 
 @interface SearchResultViewController ()
 
+@property (strong, nonatomic) UIImage* artistImage;
+
 @end
 
 @implementation SearchResultViewController
@@ -24,6 +26,11 @@
     self.albumsTableView.dataSource = self;
     
     self.artist = [BandcampMobileService loadBandDetails:self.bandId];
+    
+    self.artistLabel.text = self.artist.name;
+    
+    self.artistImage = [CachedImageHelper getImageForUrl:self.artist.imageUrl];
+    self.artistImageView.image = self.artistImage;
     
     [self.albumsTableView reloadData];
 }

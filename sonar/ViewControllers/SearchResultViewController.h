@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchResultViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *albumsTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *artistImageView;
+@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 
 @property (nonatomic) long bandId;
 @property (strong, atomic) Artist* artist;

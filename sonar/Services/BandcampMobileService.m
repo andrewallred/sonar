@@ -31,6 +31,7 @@
     artist.biography = dictionary[@"biography"];
     artist.bandcampUrl = dictionary[@"bandcamp_url"];
     artist.bioImageId = [dictionary[@"bio_image_id"] longValue];
+    artist.imageUrl = [NSString stringWithFormat:@"https://f4.bcbits.com/img/00%ld_16.jpg", artist.bioImageId];
     
     artist.discography = [[NSMutableArray<Album*> alloc] init];
     for (int i = 0; i < [dictionary[@"discography"] count]; i++) {
@@ -66,6 +67,7 @@
     album.imageUrl = [NSString stringWithFormat:@"https://f4.bcbits.com/img/a0%ld_16.jpg", album.artId];
     album.title = dictionary[@"album_title"];
     album.itemId = [dictionary[@"id"] longValue];
+    album.bandName = dictionary[@"tralbum_artist"];
     
     album.tracks = [[NSMutableArray<Track*> alloc] init];
     for (int i = 0; i < [dictionary[@"tracks"] count]; i++) {
