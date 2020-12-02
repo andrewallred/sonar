@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BandcampMobileService : NSObject
 
-+(Artist*) loadBandDetails:(long)bandId;
-+(Album*) loadAlbumDetails:(long)albumId withBandId:(long) bandId;
++(void) loadBandDetails:(long)bandId completionHandler:(void (^)(Artist* artist, NSError * _Nullable error))completionHandler;
++(void) loadAlbumDetails:(long)albumId withBandId:(long) bandId completionHandler:(void (^)(Album* album, NSError * _Nullable error))completionHandler;
 
 @end
 

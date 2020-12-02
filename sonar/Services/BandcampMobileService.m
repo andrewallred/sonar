@@ -8,16 +8,27 @@
 
 #import "BandcampMobileService.h"
 #import "ServiceCaller.h"
+#import "ServiceCallerAsync.h"
 
 @implementation BandcampMobileService
 
-+(Artist*) loadBandDetails:(long)bandId {
++(void) loadBandDetails:(long)bandId completionHandler:(void (^)(Artist* artist, NSError * _Nullable error))completionHandler {
     
-    NSString* postData = [NSString stringWithFormat:@"{\"band_id\":\"%ld\"}", bandId];
+    NSString* postString = [NSString stringWithFormat:@"{\"band_id\":\"%ld\"}", bandId];
+    NSData* postData = [postString dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSDictionary* details = [ServiceCaller postToService:@"https://bandcamp.com/api/mobile/22/band_details" withData:postData];
-    
-    return [self dictionaryToArtist:details];
+    [ServiceCallerAsync postDataToUrl:@"https://bandcamp.com/api/mobile/22/band_details" data:postData completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSDictionary *bandJson = [NSJSONSerialization
+                                 JSONObjectWithData:data
+                                 options:NSJSONReadingMutableLeaves
+                                 error:&error];
+        
+        Artist* artist = [self dictionaryToArtist:bandJson];
+        
+        completionHandler(artist, nil);
+        
+    }];
     
 }
 
@@ -49,13 +60,22 @@
     return artist;
 }
 
-+(Album*) loadAlbumDetails:(long)albumId withBandId:(long) bandId {
++(void) loadAlbumDetails:(long)albumId withBandId:(long) bandId completionHandler:(void (^)(Album* album, NSError * _Nullable error))completionHandler {
     
     NSString* url = [NSString stringWithFormat: @"https://bandcamp.com/api/mobile/22/tralbum_details?band_id=%ld&tralbum_id=%ld&tralbum_type=a", bandId, albumId];
     
-    NSDictionary* details = [ServiceCaller loadJsonByUrl:url withTimeoutInterval:120];
-    
-    return [self dictionaryToAlbum:details];
+    [ServiceCallerAsync getDataForUrl:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSDictionary *albumJson = [NSJSONSerialization
+                                 JSONObjectWithData:data
+                                 options:NSJSONReadingMutableLeaves
+                                 error:&error];
+        
+        Album* album = [self dictionaryToAlbum:albumJson];
+        
+        completionHandler(album, nil);
+
+    }];
     
 }
 

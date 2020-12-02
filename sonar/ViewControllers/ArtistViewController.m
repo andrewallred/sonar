@@ -26,27 +26,34 @@
     self.albumsTableView.dataSource = self;
     self.albumsTableView.backgroundColor = [UIColor clearColor];
     
-    self.artist = [BandcampMobileService loadBandDetails:self.bandId];
+    self.artistLabel.text = @"";
     
-    self.artistLabel.text = self.artist.name;
+    [BandcampMobileService loadBandDetails:self.bandId completionHandler:^(Artist * _Nonnull artist, NSError * _Nullable error) {
+        
+        self.artist = artist;
+        
+        [CachedImageHelper getAndDisplayImageForUrlAsync:self.artist.imageUrl withImageView:self.artistImageView withParent:nil];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.artistLabel.text = self.artist.name;
+            [self.albumsTableView reloadData];
+            
+        });
+        
+    }];
     
-    self.artistImage = [CachedImageHelper getImageForUrl:self.artist.imageUrl];
-    self.artistImageView.image = self.artistImage;
-    
-    [self.albumsTableView reloadData];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.imageView.image = nil;
     
     Album* album = self.artist.discography[indexPath.row];
     
     cell.textLabel.text = album.title;
-    
-    NSString* imageUrl = album.imageUrl;
-    cell.imageView.image = cell.imageView.image = [CachedImageHelper getImageForUrl:imageUrl];;
     
     return cell;
 }
@@ -55,6 +62,14 @@
 {
     // Return the number of rows in the section.
     return [self.artist.discography count];
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Album* album = self.artist.discography[indexPath.row];
+    
+    [CachedImageHelper getAndDisplayImageForUrlAsync:album.imageUrl withImageView:cell.imageView withParent:cell];
+    
 }
 
 Album* selectedAlbum;

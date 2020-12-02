@@ -31,16 +31,23 @@
     self.songsTableView.dataSource = self;
     self.songsTableView.backgroundColor = [UIColor clearColor];
     
-    self.album = [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId];
-    
-    self.artistLabel.text = self.album.bandName;
-    self.albumLabel.text = self.album.title;
-    self.releasedLabel.text = self.album.releaseDate;
-    
-    self.albumImage = [CachedImageHelper getImageForUrl:self.album.imageUrl];
-    self.albumImageView.image = self.albumImage;
-    
-    [self.songsTableView reloadData];
+    [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
+        
+        self.album = album;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.artistLabel.text = self.album.bandName;
+            self.albumLabel.text = self.album.title;
+            self.releasedLabel.text = self.album.releaseDate;
+            
+            [CachedImageHelper getAndDisplayImageForUrlAsync:self.album.imageUrl withImageView:self.albumImageView withParent:nil];
+            
+            [self.songsTableView reloadData];
+            
+        });
+        
+    }];
     
 }
 
@@ -48,6 +55,7 @@
 {
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.imageView.image = nil;
     
     Track* track = self.album.tracks[indexPath.row];
     

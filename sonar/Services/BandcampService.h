@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BandcampService : NSObject
 
-+(NSDictionary*) loadSearchResults:(NSString *)urlString;
++(void) loadSearchResults:(NSString *)searchTerm completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 @end
 

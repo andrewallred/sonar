@@ -47,22 +47,33 @@
     
     NSLog(@"search term %@", _searchTextField.text);
     
-    NSDictionary *searchResults = [BandcampService loadSearchResults:_searchTextField.text];
-    
-    [self.artists removeAllObjects];
-    
-    for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
+    [BandcampService loadSearchResults:_searchTextField.text completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
-        if ([searchResult[@"type"] isEqualToString:@"b"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             
-            Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"auto"][@"results"][i]];
-            [self.artists addObject:artist];
-        }
+            NSDictionary *searchResults = [NSJSONSerialization
+                                           JSONObjectWithData:data
+                                           options:NSJSONReadingMutableLeaves
+                                           error:nil];
+            
+            [self.artists removeAllObjects];
+            
+            for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
+                
+                NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
+                if ([searchResult[@"type"] isEqualToString:@"b"]) {
+                    
+                    Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"auto"][@"results"][i]];
+                    [self.artists addObject:artist];
+                }
+                
+            }
+            
+            [self.searchTableView reloadData];
+            
+        });
         
-    }
-    
-    [self.searchTableView reloadData];
+    }];
     
 }
 
@@ -73,7 +84,7 @@ long bandId;
     bandId = self.artists[selectedRow].bandId;
     
     [LocalDataHelper addArtistToSearchedArtists:self.artists[selectedRow]];
-
+    
     [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
 }
 
@@ -92,12 +103,11 @@ long bandId;
 {
     static NSString *CellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.imageView.image = nil;
     
     Artist* artist = self.artists[indexPath.row];
     
     cell.textLabel.text = artist.name;
-    
-    cell.imageView.image = [CachedImageHelper getImageForUrl:artist.imageUrl];
     
     return cell;
 }
@@ -106,6 +116,14 @@ long bandId;
 {
     // Return the number of rows in the section.
     return [self.artists count];
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {    
+    
+    Artist* artist = self.artists[indexPath.row];
+    
+    [CachedImageHelper getAndDisplayImageForUrlAsync:artist.imageUrl withImageView:cell.imageView withParent:cell];
+    
 }
 
 

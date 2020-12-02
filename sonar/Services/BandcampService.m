@@ -7,28 +7,22 @@
 //
 
 #import "BandcampService.h"
-#import "ServiceCaller.h"
+#import "ServiceCallerAsync.h"
 #import "RegexHelper.h"
 #import "Artist.h"
 #import "Album.h"
 
 @implementation BandcampService
 
-+(NSDictionary*) loadSearchResults:(NSString *)searchTerm {
++(void) loadSearchResults:(NSString *)searchTerm completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler {
+    
+    searchTerm = [ServiceCallerAsync encodeParameter:searchTerm];
     
     NSLog(@"search term %@", searchTerm);
 
-    NSString *url = [NSString stringWithFormat:@"https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=%@",
-                     [ServiceCaller encodeParameter:searchTerm]];
-
-    NSData* data = [ServiceCaller loadDataByUrl:url];
-
-    NSDictionary *searchResults = [NSJSONSerialization
-                             JSONObjectWithData:data
-                             options:NSJSONReadingMutableLeaves
-                             error:nil];
+    NSString *url = [NSString stringWithFormat:@"https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=%@", searchTerm];
     
-    return searchResults;
+    [ServiceCallerAsync getDataForUrl:url completionHandler:completionHandler];
 }
 
 @end
