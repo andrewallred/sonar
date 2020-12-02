@@ -21,7 +21,8 @@
     self.audioSession = [AVAudioSession sharedInstance];
     
     [self.audioSession setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionCategoryPlayback options:nil error:nil];
-
+    
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
     
     return YES;
 }
