@@ -87,6 +87,16 @@
     artistMetadataItem.keySpace = AVMetadataKeySpaceCommon;
     artistMetadataItem.value = album.bandName;
     
+    if (titleMetadataItem == nil) {
+        titleMetadataItem.value = @"";
+    }
+    if (albumMetadataItem == nil) {
+        albumMetadataItem.value = @"";
+    }
+    if (artistMetadataItem == nil) {
+        artistMetadataItem.value = @"";
+    }
+    
     NSArray *metadataArray = [[NSArray alloc] initWithObjects:titleMetadataItem,albumMetadataItem,artistMetadataItem, nil];
     
     playerItem.externalMetadata = metadataArray;
