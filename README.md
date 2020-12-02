@@ -10,7 +10,7 @@ Simple, I wanted to listen to my favorite Bandcamp artists on my AppleTV.
 
 ## What's it look like?
 
-Sonar uses the out of the box tvOS UI. You can take a look at screenshots [here](screenshots/) (special shoutout to [Deep Jungle](https://deepjungle.bandcamp.com/))
+Sonar uses the out of the box tvOS UI. You can take a look at screenshots [here](screenshots/) (with a special shoutout to [Deep Jungle](https://deepjungle.bandcamp.com/)).
 
 ## Why Objective C?
 
