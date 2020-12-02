@@ -31,6 +31,10 @@
     self.songsTableView.dataSource = self;
     self.songsTableView.backgroundColor = [UIColor clearColor];
     
+    self.artistLabel.text = @"";
+    self.albumLabel.text = @"";
+    self.releasedLabel.text = @"";
+    
     [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
         
         if (error != nil) {
