@@ -10,6 +10,7 @@
 #import "AlbumViewController.h"
 #import "CachedImageHelper.h"
 #import "BandcampMobileService.h"
+#import "LogHelper.h"
 
 @interface ArtistViewController ()
 
@@ -29,6 +30,14 @@
     self.artistLabel.text = @"";
     
     [BandcampMobileService loadBandDetails:self.bandId completionHandler:^(Artist * _Nonnull artist, NSError * _Nullable error) {
+        
+        if (error != nil) {
+            
+            [LogHelper logError:error];
+            // TODO alert the user?            
+            return;
+            
+        }
         
         self.artist = artist;
         

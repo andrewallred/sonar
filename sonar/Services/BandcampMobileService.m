@@ -8,6 +8,7 @@
 
 #import "BandcampMobileService.h"
 #import "ServiceCallerAsync.h"
+#import "LogHelper.h"
 
 @implementation BandcampMobileService
 
@@ -25,7 +26,7 @@
         
         Artist* artist = [self dictionaryToArtist:bandJson];
         
-        completionHandler(artist, nil);
+        completionHandler(artist, error);
         
     }];
     
@@ -72,7 +73,7 @@
         
         Album* album = [self dictionaryToAlbum:albumJson];
         
-        completionHandler(album, nil);
+        completionHandler(album, error);
 
     }];
     

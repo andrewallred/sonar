@@ -30,6 +30,7 @@
 		85CA9A132575E48300BDDA1E /* LocalDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A122575E48300BDDA1E /* LocalDataHelper.m */; };
 		85CA9A192576053000BDDA1E /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A182576053000BDDA1E /* TrackViewController.m */; };
 		85CA9A2C2576F16E00BDDA1E /* ServiceCallerAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A2B2576F16E00BDDA1E /* ServiceCallerAsync.m */; };
+		85CA9A4125771FC300BDDA1E /* LogHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A4025771FC300BDDA1E /* LogHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		85CA9A182576053000BDDA1E /* TrackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackViewController.m; sourceTree = "<group>"; };
 		85CA9A2A2576F16E00BDDA1E /* ServiceCallerAsync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceCallerAsync.h; sourceTree = "<group>"; };
 		85CA9A2B2576F16E00BDDA1E /* ServiceCallerAsync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceCallerAsync.m; sourceTree = "<group>"; };
+		85CA9A3F25771FC300BDDA1E /* LogHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogHelper.h; sourceTree = "<group>"; };
+		85CA9A4025771FC300BDDA1E /* LogHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,8 @@
 				852BC6CD2574B5F400288B9A /* CachedImageHelper.m */,
 				85CA9A112575E48300BDDA1E /* LocalDataHelper.h */,
 				85CA9A122575E48300BDDA1E /* LocalDataHelper.m */,
+				85CA9A3F25771FC300BDDA1E /* LogHelper.h */,
+				85CA9A4025771FC300BDDA1E /* LogHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 				85CA9A132575E48300BDDA1E /* LocalDataHelper.m in Sources */,
 				852BC6CE2574B5F400288B9A /* CachedImageHelper.m in Sources */,
 				850B747625748E77000B9D17 /* AlbumViewController.m in Sources */,
+				85CA9A4125771FC300BDDA1E /* LogHelper.m in Sources */,
 				85CA9A2C2576F16E00BDDA1E /* ServiceCallerAsync.m in Sources */,
 				85459518257413CE00E96F97 /* Album.m in Sources */,
 				854594DC25736A0A00E96F97 /* main.m in Sources */,

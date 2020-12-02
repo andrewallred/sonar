@@ -12,6 +12,7 @@
 #import "Album.h"
 #import "CachedImageHelper.h"
 #import "TrackViewController.h"
+#import "LogHelper.h"
 
 @interface AlbumViewController ()
 
@@ -31,6 +32,14 @@
     self.songsTableView.backgroundColor = [UIColor clearColor];
     
     [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
+        
+        if (error != nil) {
+            
+            [LogHelper logError:error];
+            // TODO alert the user?
+            return;
+            
+        }
         
         self.album = album;
         

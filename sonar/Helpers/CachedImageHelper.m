@@ -13,7 +13,7 @@
 
 NSCache<NSString*, UIImage*>* imageCache;
 
-+(void) getImageForUrl:(NSString*) url completionHandler:(void (^)(UIImage* image, NSError * _Nullable error))completionHandler
++(void) getImageForUrl:(NSString*) url completionHandler:(void (^)(UIImage* image))completionHandler
  {
     
      [ServiceCallerAsync getDataForUrl:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -32,7 +32,7 @@ NSCache<NSString*, UIImage*>* imageCache;
          
          dispatch_async(dispatch_get_main_queue(), ^{
              
-             completionHandler(cachedImage, error);
+             completionHandler(cachedImage);
              
          });
          
@@ -42,7 +42,7 @@ NSCache<NSString*, UIImage*>* imageCache;
 
 +(void) getAndDisplayImageForUrlAsync:(NSString*) url withImageView:(UIImageView*) imageView withParent:(UIView*) parent {
     
-    [CachedImageHelper getImageForUrl:url completionHandler:^(UIImage * _Nonnull image, NSError * _Nullable error) {
+    [CachedImageHelper getImageForUrl:url completionHandler:^(UIImage * _Nonnull image) {
         
             imageView.image = image;
             [imageView setNeedsLayout];

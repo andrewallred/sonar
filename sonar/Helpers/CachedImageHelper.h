@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CachedImageHelper : NSObject
 
-+(void) getImageForUrl:(NSString*) url completionHandler:(void (^)(UIImage* image, NSError * _Nullable error))completionHandler;
++(void) getImageForUrl:(NSString*) url completionHandler:(void (^)(UIImage* image))completionHandler;
 +(void) getAndDisplayImageForUrlAsync:(NSString*) url withImageView:(UIImageView*) imageView withParent:(UIView*) parent;
 
 @end

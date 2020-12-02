@@ -53,7 +53,7 @@
         
         NSString* imageUrl = self.album.imageUrl;
         
-        [CachedImageHelper getImageForUrl:imageUrl completionHandler:^(UIImage * _Nonnull image, NSError * _Nullable error) {
+        [CachedImageHelper getImageForUrl:imageUrl completionHandler:^(UIImage * _Nonnull image) {
             
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             [playerViewController.contentOverlayView addSubview:imageView];
@@ -61,8 +61,6 @@
             // might not be ideal, will review
             CGRect screenBound = [[UIScreen mainScreen] bounds];
             CGSize screenSize = screenBound.size;
-            CGFloat screenWidth = screenSize.width;
-            CGFloat screenHeight = screenSize.height;
             
             imageView.center = CGPointMake(screenSize.width  / 2,
                                            screenSize.height / 2);

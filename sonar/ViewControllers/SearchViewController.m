@@ -12,6 +12,7 @@
 #import "ArtistViewController.h"
 #import "CachedImageHelper.h"
 #import "LocalDataHelper.h"
+#import "LogHelper.h"
 
 @interface SearchViewController ()
 
@@ -48,12 +49,25 @@
     
     [BandcampService loadSearchResults:_searchTextField.text completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        if (error != nil) {
+            
+            [LogHelper logError:error];
+            // TODO alert the user?
+            return;
+            
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSError* error;
             
             NSDictionary *searchResults = [NSJSONSerialization
                                            JSONObjectWithData:data
                                            options:NSJSONReadingMutableLeaves
-                                           error:nil];
+                                           error:&error];
+            
+            [LogHelper logError:error];            
+            // TODO alert the user?
             
             [self.artists removeAllObjects];
             
