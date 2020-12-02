@@ -8,6 +8,10 @@ Currently learning to crawl.
 
 Simple, I wanted to listen to my favorite Bandcamp artists on my AppleTV.
 
+## What's it look like?
+
+You can take a look at screenshots [here](screenshots/) (special shoutout to [Deep Jungle](https://deepjungle.bandcamp.com/))
+
 ## Why Objective C?
 
 I've got a bit of a soft spot for Objective C, and in this case it was the quickest path to a proof of concept. That said, Swift would be the right choice to greenfield this as an enterprise product.
