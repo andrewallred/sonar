@@ -21,7 +21,6 @@
 		854594F125736A0A00E96F97 /* sonarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594F025736A0A00E96F97 /* sonarUITests.m */; };
 		85459500257378EB00E96F97 /* ArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854594FF257378EB00E96F97 /* ArtistViewController.m */; };
 		8545950325737DFD00E96F97 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8545950225737DFD00E96F97 /* AVFoundation.framework */; };
-		8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950525739B9F00E96F97 /* ServiceCaller.m */; };
 		8545950925739D3200E96F97 /* RegexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950825739D3200E96F97 /* RegexHelper.m */; };
 		8545950B2574007A00E96F97 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8545950A2574007A00E96F97 /* AVKit.framework */; };
 		8545950E25740E0200E96F97 /* BandcampService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8545950D25740E0200E96F97 /* BandcampService.m */; };
@@ -78,8 +77,6 @@
 		854594FE257378EB00E96F97 /* ArtistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistViewController.h; sourceTree = "<group>"; };
 		854594FF257378EB00E96F97 /* ArtistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistViewController.m; sourceTree = "<group>"; };
 		8545950225737DFD00E96F97 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		8545950425739B9F00E96F97 /* ServiceCaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceCaller.h; sourceTree = "<group>"; };
-		8545950525739B9F00E96F97 /* ServiceCaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceCaller.m; sourceTree = "<group>"; };
 		8545950725739D3200E96F97 /* RegexHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegexHelper.h; sourceTree = "<group>"; };
 		8545950825739D3200E96F97 /* RegexHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegexHelper.m; sourceTree = "<group>"; };
 		8545950A2574007A00E96F97 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
@@ -208,8 +205,6 @@
 		85459510257412F600E96F97 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8545950425739B9F00E96F97 /* ServiceCaller.h */,
-				8545950525739B9F00E96F97 /* ServiceCaller.m */,
 				8545950C25740E0200E96F97 /* BandcampService.h */,
 				8545950D25740E0200E96F97 /* BandcampService.m */,
 				850A55352575ABA7009FB93C /* BandcampMobileService.h */,
@@ -381,7 +376,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8545951B2574143300E96F97 /* SearchResult.m in Sources */,
-				8545950625739B9F00E96F97 /* ServiceCaller.m in Sources */,
 				854594D125736A0700E96F97 /* SearchViewController.m in Sources */,
 				850A55372575ABA7009FB93C /* BandcampMobileService.m in Sources */,
 				85CA9A192576053000BDDA1E /* TrackViewController.m in Sources */,
