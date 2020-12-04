@@ -93,7 +93,9 @@
     for (int i = 0; i < [dictionary[@"tracks"] count]; i++) {
         Track* track = [[Track alloc] init];
         // TODO should fix this
-        track.streamingUrl = dictionary[@"tracks"][i][@"streaming_url"][@"mp3-128"];
+        if (![dictionary[@"tracks"][i][@"streaming_url"] isEqual:[NSNull null]]) {
+            track.streamingUrl = dictionary[@"tracks"][i][@"streaming_url"][@"mp3-128"];
+        }
         track.title = dictionary[@"tracks"][i][@"title"];
         track.number = i;
         
