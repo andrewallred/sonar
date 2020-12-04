@@ -73,6 +73,10 @@
     
     cell.textLabel.text = track.title;
     
+    if (track.streamingUrl == nil) {
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+    }
+    
     return cell;
 }
 
