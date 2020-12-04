@@ -88,8 +88,9 @@
     
     self.selectedTrack = self.album.tracks[selectedRow];
     
-    // TODO
-    [self performSegueWithIdentifier:@"TrackSegue" sender:self];
+    if (self.selectedTrack.streamingUrl != nil) {        
+        [self performSegueWithIdentifier:@"TrackSegue" sender:self];
+    }
     
 }
 
