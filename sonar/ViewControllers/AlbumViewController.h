@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *albumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *releasedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightsLabel;
 
 @property (nonatomic, strong) Album* album;
 

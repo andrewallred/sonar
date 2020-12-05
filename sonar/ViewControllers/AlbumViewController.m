@@ -34,6 +34,7 @@
     self.artistLabel.text = @"";
     self.albumLabel.text = @"";
     self.releasedLabel.text = @"";
+    self.rightsLabel.text = @"";
     
     [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
         
@@ -46,6 +47,21 @@
         }
         
         self.album = album;
+        
+        [BandcampService loadAlbumFromHtml:album.albumUrl completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
+            
+            self.album.rightsInfo = album.rightsInfo;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.rightsLabel.alpha = 0;
+                self.rightsLabel.text = self.album.rightsInfo;
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
+                                 animations:^{ self.rightsLabel.alpha = 1;}
+                                 completion:nil];
+            });
+            
+        }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

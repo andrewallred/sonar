@@ -163,6 +163,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Released Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUx-ys-ypU">
+                                <rect key="frame" x="1224" y="895" width="600" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rights Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAa-9n-wkC">
                                 <rect key="frame" x="1224" y="841" width="600" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -179,6 +186,7 @@
                         <outlet property="albumLabel" destination="OPk-p5-tN9" id="c4I-yd-VFs"/>
                         <outlet property="artistLabel" destination="iRq-p6-SCK" id="GZN-P0-Fmi"/>
                         <outlet property="releasedLabel" destination="sUx-ys-ypU" id="FBk-jK-2zt"/>
+                        <outlet property="rightsLabel" destination="rAa-9n-wkC" id="Vdq-xJ-9ko"/>
                         <outlet property="songsTableView" destination="fMv-dQ-05o" id="Q88-hO-05q"/>
                         <segue destination="pCG-eB-W6H" kind="show" identifier="TrackSegue" id="EOZ-9K-7Sy"/>
                     </connections>

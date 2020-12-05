@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* imageUrl;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* url;
+@property (nonatomic, strong) NSString* rightsInfo;
 @property (nonatomic, strong) NSString* releaseDate;
 @property (nonatomic, strong) NSMutableArray<Track*>* tracks;
 
