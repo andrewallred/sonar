@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(void) loadSearchResults:(NSString *)searchTerm completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
++(void) loadAlbumFromHtml:(NSString *)url completionHandler:(void (^)(Album* album, NSError * _Nullable error))completionHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END
