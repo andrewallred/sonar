@@ -88,6 +88,8 @@
     album.title = dictionary[@"album_title"];
     album.itemId = [dictionary[@"id"] longValue];
     album.bandName = dictionary[@"tralbum_artist"];
+    album.albumUrl = dictionary[@"bandcamp_url"];
+    album.albumId = [dictionary[@"album_id"] longValue];
     
     album.tracks = [[NSMutableArray<Track*> alloc] init];
     for (int i = 0; i < [dictionary[@"tracks"] count]; i++) {
