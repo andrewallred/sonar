@@ -41,9 +41,20 @@
         if (error != nil) {
             
             [LogHelper logError:error];
-            // TODO alert the user?
+            
+            [self displayError];
+            
             return;
             
+        }
+        
+        if (album.albumId == 0) {
+            
+            NSLog(@"No album id found, displaying error message.");
+            
+            [self displayError];
+            
+            return;
         }
         
         self.album = album;
@@ -76,6 +87,19 @@
         });
         
     }];
+    
+}
+
+-(void) displayError {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.artistLabel.text = @"Error...";
+        self.albumImageView.image = [UIImage imageNamed:@"image-not-found"];
+        
+        [self.songsTableView reloadData];
+        
+    });
     
 }
 
