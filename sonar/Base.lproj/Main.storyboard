@@ -41,6 +41,7 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="searchEditingDidBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="VWs-ER-Jcj"/>
                                     <action selector="searchEditingDidEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="idr-GQ-2i5"/>
                                 </connections>
                             </textField>

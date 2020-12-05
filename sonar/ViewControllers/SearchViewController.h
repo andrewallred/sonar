@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UITableView *searchTableView;
 
-
+- (IBAction)searchEditingDidBegin:(id)sender;
 - (IBAction)searchEditingDidEnd:(id)sender;
 
 @property (strong, atomic) NSMutableArray<Artist*>* artists;

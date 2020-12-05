@@ -43,6 +43,10 @@
     
 }
 
+- (IBAction)searchEditingDidBegin:(id)sender {
+    _searchTextField.text = @"";
+}
+
 - (IBAction)searchEditingDidEnd:(id)sender {
     
     NSLog(@"search term %@", _searchTextField.text);
