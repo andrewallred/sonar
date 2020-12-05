@@ -29,10 +29,12 @@
     }
     
     bool foundArtist = NO;
+    int foundAt = 0;
     for (int i = 0; i < [searchedArtists count]; i++) {
         Artist* savedArtist = [[Artist alloc] initWithDictionary:searchedArtists[i]];
         if (savedArtist.bandId == artist.bandId) {
             foundArtist = YES;
+            foundAt = i;
             break;;
         }
     }
@@ -41,12 +43,17 @@
         
         [searchedArtists addObject:artist.dictionary];
         
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:searchedArtists requiringSecureCoding:NO error:nil];
-
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"searchedArtists"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        
+        [searchedArtists removeObjectAtIndex:foundAt];
+        [searchedArtists insertObject:artist.dictionary atIndex:0];
         
     }
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:searchedArtists requiringSecureCoding:NO error:nil];
+
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"searchedArtists"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
