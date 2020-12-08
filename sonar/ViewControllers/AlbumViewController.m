@@ -44,7 +44,7 @@
             [self displayError];
             return;
             
-        } else if (album.albumId == 0) {
+        } else if (album == nil || album.albumId == 0) {
             
             NSLog(@"No album id found, displaying error message.");
             [self displayError];
