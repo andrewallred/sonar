@@ -41,19 +41,13 @@
         if (error != nil) {
             
             [LogHelper logError:error];
-            
             [self displayError];
-            
             return;
             
-        }
-        
-        if (album.albumId == 0) {
+        } else if (album.albumId == 0) {
             
             NSLog(@"No album id found, displaying error message.");
-            
             [self displayError];
-            
             return;
         }
         
