@@ -19,6 +19,13 @@
     
     [ServiceCallerAsync postDataToUrl:@"https://bandcamp.com/api/mobile/22/band_details" data:postData completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        if (error !=  nil) {
+            
+            completionHandler(nil, error);
+            return;
+            
+        }
+        
         NSDictionary *bandJson = [NSJSONSerialization
                                  JSONObjectWithData:data
                                  options:NSJSONReadingMutableLeaves
