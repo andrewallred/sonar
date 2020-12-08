@@ -40,7 +40,7 @@ NSCache<NSString*, UIImage*>* imageCache;
     
 }
 
-+(void) getAndDisplayImageForUrlAsync:(NSString*) url withImageView:(UIImageView*) imageView withParent:(UIView*) parent {
++(void) getAndDisplayImageForUrlAsync:(NSString*) url withImageView:(UIImageView*) imageView withParent:(nullable UIView*) parent {
     
     [CachedImageHelper getImageForUrl:url completionHandler:^(UIImage * _Nonnull image) {
         
