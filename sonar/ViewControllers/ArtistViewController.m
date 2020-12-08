@@ -31,10 +31,10 @@
     
     [BandcampMobileService loadBandDetails:self.bandId completionHandler:^(Artist * _Nonnull artist, NSError * _Nullable error) {
         
-        if (error != nil) {
+        if (error != nil || artist == nil) {
             
             [LogHelper logError:error];
-            // TODO alert the user?            
+            [self displayError];
             return;
             
         }
@@ -100,6 +100,19 @@ Album* selectedAlbum;
     {
         ((AlbumViewController *)destinationViewController).album = selectedAlbum;
     }
+}
+
+-(void) displayError {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.artistLabel.text = @"Error...";
+        self.artistImageView.image = [UIImage imageNamed:@"image-not-found"];
+        
+        [self.albumsTableView reloadData];
+        
+    });
+    
 }
 
 @end
