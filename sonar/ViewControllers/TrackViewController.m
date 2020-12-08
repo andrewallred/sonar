@@ -136,7 +136,9 @@
     
     if (self.currentTrack.number + 1 == [self.album.tracks count]) {
         
-        NSLog(@"Album finished");        
+        [self.playerQueue replaceCurrentItemWithPlayerItem:nil];
+        
+        NSLog(@"Album finished");
         [self dismissViewControllerAnimated:YES completion:^{
             NSLog(@"Returned to album view");
         }];
