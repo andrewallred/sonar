@@ -49,17 +49,21 @@
     
     for (int i = track.number + 1; i < [album.tracks count]; i++) {
         
-        url = [NSURL URLWithString:album.tracks[i].streamingUrl];
-        
-        AVURLAsset* avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
-        
-        AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
-        [self addMetadataToPlayerItem:playerItem Track:album.tracks[i] Album:album];
-        
-        [self.playerQueue insertItem:playerItem afterItem:lastPlayerItem];
-        
-        lastPlayerItem = playerItem;
-        
+        if (album.tracks[i].streamingUrl != nil && ![album.tracks[i].streamingUrl isEqual:[NSNull null]]) {
+            
+            url = [NSURL URLWithString:album.tracks[i].streamingUrl];
+            
+            AVURLAsset* avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+            
+            AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
+            [self addMetadataToPlayerItem:playerItem Track:album.tracks[i] Album:album];
+            
+            [self.playerQueue insertItem:playerItem afterItem:lastPlayerItem];
+            
+            lastPlayerItem = playerItem;
+
+        }
+                
     }
     
     AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
