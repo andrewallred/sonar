@@ -13,7 +13,7 @@
 
 @interface TrackViewController ()
 
-@property (strong, nonatomic) AVPlayer *player;
+@property (strong, nonatomic) AVQueuePlayer *playerQueue;
 @property (strong, nonatomic) UIImage* albumImage;
 
 @end
@@ -35,14 +35,35 @@
     
     self.currentTrack = track;
     
-    NSURL *url = [NSURL URLWithString:track.streamingUrl];
     
-    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
-    self.player = [AVPlayer playerWithPlayerItem:playerItem];
+    NSURL* url = [NSURL URLWithString:track.streamingUrl];
+    
+    AVURLAsset* avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+    
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
+    [self addMetadataToPlayerItem:playerItem Track:track Album:album];
+    
+    self.playerQueue = [[AVQueuePlayer alloc] initWithItems:@[playerItem]];
+    
+    AVPlayerItem* lastPlayerItem = playerItem;
+    
+    for (int i = track.number + 1; i < [album.tracks count]; i++) {
+        
+        url = [NSURL URLWithString:album.tracks[i].streamingUrl];
+        
+        AVURLAsset* avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+        
+        AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:avAsset];
+        [self addMetadataToPlayerItem:playerItem Track:album.tracks[i] Album:album];
+        
+        [self.playerQueue insertItem:playerItem afterItem:lastPlayerItem];
+        
+        lastPlayerItem = playerItem;
+        
+    }
     
     AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
-    playerViewController.player = self.player;
+    playerViewController.player = self.playerQueue;
     
     // show the view controller
     [self addChildViewController:playerViewController];
@@ -68,6 +89,13 @@
         }];
         
     }
+    
+    [self.playerQueue play];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerQueue.currentItem];
+}
+
+-(void) addMetadataToPlayerItem:(AVPlayerItem*) playerItem Track:(Track*) track Album:(Album*) album {
     
     AVMutableMetadataItem *titleMetadataItem = [[AVMutableMetadataItem alloc] init];
     titleMetadataItem.locale = [NSLocale currentLocale];
@@ -101,16 +129,18 @@
     
     playerItem.externalMetadata = metadataArray;
     
-    [self.player play];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
 }
 
 -(void)playerDidFinishPlaying:(NSNotification *) notification {
     NSLog(@"Track finished");
     
-    if (self.currentTrack.number + 1 < [self.album.tracks count]) {
-        [self playAudio:self.album.tracks[self.currentTrack.number + 1] onAlbum:self.album];
+    if (self.currentTrack.number + 1 == [self.album.tracks count]) {
+        
+        NSLog(@"Album finished");        
+        [self dismissViewControllerAnimated:YES completion:^{
+            NSLog(@"Returned to album view");
+        }];
+        
     }
 }
 
