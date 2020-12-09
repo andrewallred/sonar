@@ -28,11 +28,19 @@
     self.searchTableView.dataSource = self;
     self.searchTableView.backgroundColor = [UIColor clearColor];
     
-    NSArray<NSDictionary*>* savedSearches = [LocalDataHelper getRecentlySearchedArtists];
-    
     if (self.artists == nil) {
         self.artists = [[NSMutableArray<Artist*> alloc] init];
     }
+    
+    [self loadSavedSearches];
+    
+}
+
+-(void) loadSavedSearches {
+    
+    NSArray<NSDictionary*>* savedSearches = [LocalDataHelper getRecentlySearchedArtists];
+    
+    [self.artists removeAllObjects];
     
     for (int i = 0; i < [savedSearches count]; i++) {
         Artist* artist = [[Artist alloc] initWithDictionary:savedSearches[i]];
@@ -45,52 +53,64 @@
 
 - (IBAction)searchEditingDidBegin:(id)sender {
     _searchTextField.text = @"";
+    
+    [self.artists removeAllObjects];
+    
+    [self.searchTableView reloadData];
 }
 
 - (IBAction)searchEditingDidEnd:(id)sender {
     
     NSLog(@"search term %@", _searchTextField.text);
     
-    [BandcampService loadSearchResults:_searchTextField.text completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    if ([_searchTextField.text isEqualToString:@""]) {
         
-        if (error != nil) {
-            
-            [LogHelper logError:error];
-            // TODO alert the user?
-            return;
-            
-        }
+        [self loadSavedSearches];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+    } else {
+        
+        [BandcampService loadSearchResults:_searchTextField.text completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
-            NSError* error;
-            
-            NSDictionary *searchResults = [NSJSONSerialization
-                                           JSONObjectWithData:data
-                                           options:NSJSONReadingMutableLeaves
-                                           error:&error];
-            
-            [LogHelper logError:error];            
-            // TODO alert the user?
-            
-            [self.artists removeAllObjects];
-            
-            for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
+            if (error != nil) {
                 
-                NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
-                if ([searchResult[@"type"] isEqualToString:@"b"]) {
-                    
-                    Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"auto"][@"results"][i]];
-                    [self.artists addObject:artist];
-                }
+                [LogHelper logError:error];
+                // TODO alert the user?
+                return;
                 
             }
             
-            [self.searchTableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSError* error;
+                
+                NSDictionary *searchResults = [NSJSONSerialization
+                                               JSONObjectWithData:data
+                                               options:NSJSONReadingMutableLeaves
+                                               error:&error];
+                
+                [LogHelper logError:error];
+                // TODO alert the user?
+                
+                [self.artists removeAllObjects];
+                
+                for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
+                    
+                    NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
+                    if ([searchResult[@"type"] isEqualToString:@"b"]) {
+                        
+                        Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"auto"][@"results"][i]];
+                        [self.artists addObject:artist];
+                    }
+                    
+                }
+                
+                [self.searchTableView reloadData];
+                
+            });
             
-        });
+        }];
         
-    }];
+    }
     
 }
 
