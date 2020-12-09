@@ -31,6 +31,7 @@
 		85CA9A192576053000BDDA1E /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A182576053000BDDA1E /* TrackViewController.m */; };
 		85CA9A2C2576F16E00BDDA1E /* ServiceCallerAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A2B2576F16E00BDDA1E /* ServiceCallerAsync.m */; };
 		85CA9A4125771FC300BDDA1E /* LogHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CA9A4025771FC300BDDA1E /* LogHelper.m */; };
+		85EEA15825805AE800C59989 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EEA15725805AE800C59989 /* Helper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		85CA9A2B2576F16E00BDDA1E /* ServiceCallerAsync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceCallerAsync.m; sourceTree = "<group>"; };
 		85CA9A3F25771FC300BDDA1E /* LogHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogHelper.h; sourceTree = "<group>"; };
 		85CA9A4025771FC300BDDA1E /* LogHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogHelper.m; sourceTree = "<group>"; };
+		85EEA15625805AE800C59989 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		85EEA15725805AE800C59989 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +206,8 @@
 				85CA9A122575E48300BDDA1E /* LocalDataHelper.m */,
 				85CA9A3F25771FC300BDDA1E /* LogHelper.h */,
 				85CA9A4025771FC300BDDA1E /* LogHelper.m */,
+				85EEA15625805AE800C59989 /* Helper.h */,
+				85EEA15725805AE800C59989 /* Helper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 				85459500257378EB00E96F97 /* ArtistViewController.m in Sources */,
 				854595152574137400E96F97 /* Artist.m in Sources */,
 				850B747325745C7E000B9D17 /* Track.m in Sources */,
+				85EEA15825805AE800C59989 /* Helper.m in Sources */,
 				8545950E25740E0200E96F97 /* BandcampService.m in Sources */,
 				8545950925739D3200E96F97 /* RegexHelper.m in Sources */,
 				85CA9A132575E48300BDDA1E /* LocalDataHelper.m in Sources */,

@@ -7,13 +7,14 @@
 //
 
 #import "Artist.h"
+#import "Helper.h"
 
 @implementation Artist
 
 -(id) initWithDictionary:(NSDictionary*) dictionary {
     
     if ((self = [super init]) != nil) {
-        self.bandId = [dictionary[@"id"] longValue];
+        self.bandId = [Helper idToLong:dictionary[@"id"]];
         self.name = dictionary[@"name"];
         self.imageUrl = dictionary[@"img"];
         
