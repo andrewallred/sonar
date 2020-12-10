@@ -60,6 +60,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.imageView.image = nil;
     
+    [cell.imageView setNeedsLayout];
+    [cell setNeedsLayout];
+    
     Album* album = self.artist.discography[indexPath.row];
     
     cell.textLabel.text = album.title;
@@ -77,7 +80,12 @@
     
     Album* album = self.artist.discography[indexPath.row];
     
-    [CachedImageHelper getAndDisplayImageForUrlAsync:album.imageUrl withImageView:cell.imageView withParent:cell];
+    cell.imageView.image = nil;
+    
+    [cell.imageView setNeedsLayout];
+    [cell setNeedsLayout];
+    
+    [CachedImageHelper getAndDisplayAlbumImageForUrlAsync:album withImageView:cell.imageView withParent:cell];
     
 }
 
