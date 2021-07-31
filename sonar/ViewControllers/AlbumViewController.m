@@ -36,7 +36,7 @@
     self.releasedLabel.text = @"";
     self.rightsLabel.text = @"";
     
-    [BandcampMobileService loadAlbumDetails:self.album.itemId withBandId:self.album.bandId completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
+    [BandcampMobileService loadAlbumDetails:self.album completionHandler:^(Album * _Nonnull album, NSError * _Nullable error) {
         
         if (error != nil) {
             
@@ -44,9 +44,9 @@
             [self displayError];
             return;
             
-        } else if (album == nil || album.albumId == 0) {
+        } else if (album == nil || [album.tracks count] == 0) {
             
-            NSLog(@"No album id found, displaying error message.");
+            NSLog(@"Album did not load correctly, displaying error message.");
             [self displayError];
             return;
         }

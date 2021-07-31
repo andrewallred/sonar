@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* rightsInfo;
 @property (nonatomic, strong) NSString* releaseDate;
 @property (nonatomic, strong) NSMutableArray<Track*>* tracks;
+@property (nonatomic) BOOL isAlbum;
 
 @end
 

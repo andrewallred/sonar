@@ -61,6 +61,7 @@
         album.itemId = [Helper idToLong:dictionary[@"discography"][i][@"item_id"]];
         album.releaseDate = dictionary[@"discography"][i][@"release_date"];
         album.title = dictionary[@"discography"][i][@"title"];
+        album.isAlbum = [dictionary[@"discography"][i][@"item_type"] isEqualToString:@"album"];
         
         [artist.discography addObject:album];
     }
@@ -68,9 +69,13 @@
     return artist;
 }
 
-+(void) loadAlbumDetails:(long)albumId withBandId:(long) bandId completionHandler:(void (^)(Album* album, NSError * _Nullable error))completionHandler {
++(void) loadAlbumDetails:(Album*)album completionHandler:(void (^)(Album* album, NSError * _Nullable error))completionHandler {
     
-    NSString* url = [NSString stringWithFormat: @"https://bandcamp.com/api/mobile/22/tralbum_details?band_id=%ld&tralbum_id=%ld&tralbum_type=a", bandId, albumId];
+    NSString* type = @"t";
+    if (album.isAlbum) {
+        type = @"a";
+    }
+    NSString* url = [NSString stringWithFormat: @"https://bandcamp.com/api/mobile/22/tralbum_details?band_id=%ld&tralbum_id=%ld&tralbum_type=%@", album.bandId, album.itemId, type];
     
     [ServiceCallerAsync getDataForUrl:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -94,6 +99,9 @@
     album.artId = [Helper idToLong:dictionary[@"art_id"]];
     album.imageUrl = [NSString stringWithFormat:@"https://f4.bcbits.com/img/a0%ld_16.jpg", album.artId];
     album.title = dictionary[@"album_title"];
+    if ([[NSNull null] isEqual:album.title]) {
+        album.title = dictionary[@"title"];
+    }
     album.itemId = [Helper idToLong:dictionary[@"id"]];
     album.bandName = dictionary[@"tralbum_artist"];
     album.albumUrl = dictionary[@"bandcamp_url"];
