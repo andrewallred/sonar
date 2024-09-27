@@ -95,10 +95,10 @@
                 
                 for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
                     
-                    NSDictionary* searchResult = searchResults[@"auto"][@"results"][i];
+                    NSDictionary* searchResult = searchResults[@"results"][i];
                     if ([searchResult[@"type"] isEqualToString:@"b"]) {
                         
-                        Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"auto"][@"results"][i]];
+                        Artist* artist = [[Artist alloc] initWithDictionary:searchResults[@"results"][i]];
                         [self.artists addObject:artist];
                     }
                     

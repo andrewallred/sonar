@@ -20,7 +20,7 @@
     
     NSLog(@"search term %@", searchTerm);
 
-    NSString *url = [NSString stringWithFormat:@"https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=%@", searchTerm];
+    NSString *url = [NSString stringWithFormat:@"https://bandcamp.com/api/fuzzysearch/2/app_autocomplete?q=%@", searchTerm];
     
     [ServiceCallerAsync getDataForUrl:url completionHandler:completionHandler];
 }
