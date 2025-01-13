@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Artist.h"
 
-@interface SearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface SearchViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-@property (weak, nonatomic) IBOutlet UITableView *searchTableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *searchCollectionView;
 
 - (IBAction)searchEditingDidBegin:(id)sender;
 - (IBAction)searchEditingDidEnd:(id)sender;

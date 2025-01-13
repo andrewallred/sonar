@@ -13,6 +13,7 @@
 #import "CachedImageHelper.h"
 #import "LocalDataHelper.h"
 #import "LogHelper.h"
+#import "../UIClasses/ImageCollectionViewCell.h"
 
 @interface SearchViewController ()
 
@@ -24,9 +25,21 @@
     
     [super viewDidLoad];
     
-    self.searchTableView.delegate = self;
-    self.searchTableView.dataSource = self;
-    self.searchTableView.backgroundColor = [UIColor clearColor];
+    // Set up the collection view layout
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    CGFloat width = self.view.bounds.size.width / 5;  // For 3 items per row
+    layout.itemSize = CGSizeMake(width, width);
+    layout.minimumInteritemSpacing = 10;    // Set spacing between items
+    
+    self.searchCollectionView.collectionViewLayout = layout;
+    
+    self.searchCollectionView.dataSource = self;
+    self.searchCollectionView.delegate = self;
+    
+    [self.searchCollectionView registerClass:[ImageCollectionViewCell class] forCellWithReuseIdentifier:@"ImageCell"];
+    
+    self.searchCollectionView.userInteractionEnabled = YES;
     
     if (self.artists == nil) {
         self.artists = [[NSMutableArray<Artist*> alloc] init];
@@ -47,7 +60,7 @@
         [self.artists addObject:artist];
     }
     
-    [self.searchTableView reloadData];
+    [self reloadData];
     
 }
 
@@ -56,7 +69,7 @@
     
     [self.artists removeAllObjects];
     
-    [self.searchTableView reloadData];
+    [self reloadData];
 }
 
 - (IBAction)searchEditingDidEnd:(id)sender {
@@ -70,6 +83,8 @@
     } else {
         
         [BandcampService loadSearchResults:_searchTextField.text completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            NSLog(@"Search results found!");
             
             if (error != nil) {
                 
@@ -93,7 +108,11 @@
                 
                 [self.artists removeAllObjects];
                 
-                for (int i = 0; i < [searchResults[@"auto"][@"results"] count]; i++) {
+                NSLog([searchResults description]);
+                
+                for (int i = 0; i < [searchResults[@"results"] count]; i++) {
+                    
+                    NSLog(@"Found result");
                     
                     NSDictionary* searchResult = searchResults[@"results"][i];
                     if ([searchResult[@"type"] isEqualToString:@"b"]) {
@@ -104,7 +123,7 @@
                     
                 }
                 
-                [self.searchTableView reloadData];
+                [self reloadData];
                 
             });
             
@@ -115,15 +134,6 @@
 }
 
 long bandId;
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSInteger selectedRow = [indexPath row];
-    bandId = self.artists[selectedRow].bandId;
-    
-    [LocalDataHelper addArtistToSearchedArtists:self.artists[selectedRow]];
-    
-    [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
-}
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -136,30 +146,44 @@ long bandId;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.imageView.image = nil;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"Count %i", self.artists.count);
+    return self.artists.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
+    
+    NSLog(@"Cell at %i", indexPath.row);
     
     Artist* artist = self.artists[indexPath.row];
     
-    cell.textLabel.text = artist.name;
+    cell.titleLabel.text = artist.name;
+    
+    // Get image for the current index
+    [CachedImageHelper getAndDisplayImageForUrlAsync:artist.imageUrl withImageView:cell.imageView withParent:cell];
     
     return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [self.artists count];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"Selected %i", indexPath.row);
+    
+    NSInteger selectedRow = [indexPath row];
+    bandId = self.artists[selectedRow].bandId;
+    
+    [LocalDataHelper addArtistToSearchedArtists:self.artists[selectedRow]];
+    
+    [self performSegueWithIdentifier:@"SearchResultSegue" sender:self];
+    
 }
 
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {    
+-(void) reloadData {
     
-    Artist* artist = self.artists[indexPath.row];
-    
-    [CachedImageHelper getAndDisplayImageForUrlAsync:artist.imageUrl withImageView:cell.imageView withParent:cell];
+    if (self.searchCollectionView != nil) {
+        [self.searchCollectionView reloadData];
+    }
     
 }
 
