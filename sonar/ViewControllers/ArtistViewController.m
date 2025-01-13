@@ -11,6 +11,7 @@
 #import "CachedImageHelper.h"
 #import "BandcampMobileService.h"
 #import "LogHelper.h"
+#import "../UIClasses/ImageCollectionViewCell.h"
 
 @interface ArtistViewController ()
 
@@ -23,9 +24,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.albumsTableView.delegate = self;
-    self.albumsTableView.dataSource = self;
-    self.albumsTableView.backgroundColor = [UIColor clearColor];
+    // Set up the collection view layout
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    CGFloat width = self.albumsCollectionView.frame.size.width / 4;  // For 3 items per row
+    NSLog(@"Width %i", width);
+    layout.itemSize = CGSizeMake(width, width);
+    layout.minimumInteritemSpacing = 10;    // Set spacing between items
+    
+    self.albumsCollectionView.collectionViewLayout = layout;
+    
+    self.albumsCollectionView.dataSource = self;
+    self.albumsCollectionView.delegate = self;
+    
+    [self.albumsCollectionView registerClass:[ImageCollectionViewCell class] forCellWithReuseIdentifier:@"ImageCell"];
+    
+    self.albumsCollectionView.userInteractionEnabled = YES;
     
     self.artistLabel.text = @"";
     
@@ -46,7 +60,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             self.artistLabel.text = self.artist.name;
-            [self.albumsTableView reloadData];
+            [self.albumsCollectionView reloadData];
             
         });
         
@@ -54,49 +68,30 @@
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.imageView.image = nil;
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     
-    [cell.imageView setNeedsLayout];
-    [cell setNeedsLayout];
+    NSLog(@"Cell at %li", (long)indexPath.row);
     
     Album* album = self.artist.discography[indexPath.row];
     
-    cell.textLabel.text = album.title;
+    cell.titleLabel.text = album.title;
+    
+    // Get image for the current index
+    [CachedImageHelper getAndDisplayImageForUrlAsync:album.imageUrl withImageView:cell.imageView withParent:cell];
     
     return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [self.artist.discography count];
-}
-
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    Album* album = self.artist.discography[indexPath.row];
-    
-    cell.imageView.image = nil;
-    
-    [cell.imageView setNeedsLayout];
-    [cell setNeedsLayout];
-    
-    [CachedImageHelper getAndDisplayAlbumImageForUrlAsync:album withImageView:cell.imageView withParent:cell];
-    
-}
-
 Album* selectedAlbum;
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger selectedRow = [indexPath row];
     
     selectedAlbum = self.artist.discography[selectedRow];
     
     [self performSegueWithIdentifier:@"AlbumSegue" sender:self];
+    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -117,10 +112,21 @@ Album* selectedAlbum;
         self.artistLabel.text = @"Error...";
         self.artistImageView.image = [UIImage imageNamed:@"image-not-found"];
         
-        [self.albumsTableView reloadData];
+        [self.albumsCollectionView reloadData];
         
     });
     
 }
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section { 
+    return [self.artist.discography count];
+}
+
+
+
+
+
+
+
 
 @end

@@ -11,9 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArtistViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ArtistViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *albumsTableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *albumsCollectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *artistImageView;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 
