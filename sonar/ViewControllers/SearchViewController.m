@@ -108,7 +108,7 @@
                 
                 [self.artists removeAllObjects];
                 
-                NSLog([searchResults description]);
+                NSLog(@"%@", [searchResults description]);
                 
                 for (int i = 0; i < [searchResults[@"results"] count]; i++) {
                     
@@ -147,14 +147,14 @@ long bandId;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"Count %i", self.artists.count);
+    NSLog(@"Count %lu", self.artists.count);
     return self.artists.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     
-    NSLog(@"Cell at %i", indexPath.row);
+    NSLog(@"Cell at %lu", indexPath.row);
     
     Artist* artist = self.artists[indexPath.row];
     
@@ -168,7 +168,7 @@ long bandId;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"Selected %i", indexPath.row);
+    NSLog(@"Selected %lu", indexPath.row);
     
     NSInteger selectedRow = [indexPath row];
     bandId = self.artists[selectedRow].bandId;
